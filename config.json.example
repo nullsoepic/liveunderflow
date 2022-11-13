@@ -1,0 +1,29 @@
+{
+    "token": "your.bot.token",
+    "dev": "your-id",
+    "name": "LiveUnderflow",
+    "ips": {
+        "main": "main-ip",
+        "n00b": "noob-proxy-ip"
+    },
+    "guild": {
+        "id": "guild-id",
+        "channels": {
+            "vouchchan": "vouch-log-channel",
+            "appcat": "application-category",
+            "statchan": "status-voice-channel"
+        },
+        "roles": {
+            "rwx": "moderator-role-id",
+            "rw": "solutions-role-id"
+        }
+    },
+    "autodata": {
+        "delay": 30
+    },
+    "cooldown": {
+        "enabled": true,
+        "time": 180
+    },
+    "filter": ["bannedword1", "1.1.1.1"]
+}
