@@ -9,7 +9,7 @@
     "guild": {
         "id": "guild-id",
         "channels": {
-            "vouchchan": "vouch-log-channel",
+            "logchan": "log-channel",
             "appcat": "application-category",
             "statchan": "status-voice-channel"
         },
