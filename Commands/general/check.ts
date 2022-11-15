@@ -30,7 +30,7 @@ module.exports = {
 
         client.cooldowns = [...client.cooldowns, `${interaction.member.user.tag}`]
         setTimeout(() => {
-            client.cooldowns = client.cooldowns.filter(function(v) {
+            client.cooldowns = client.cooldowns.filter((v) => {
                 return v !== `${interaction.member.user.tag}`;
             });
         }, client.config.cooldown.time * 1000)

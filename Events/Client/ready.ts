@@ -43,7 +43,7 @@ module.exports = {
         console.log(` ⚪ - ${client.user.tag} ready!`);
         client.user.setActivity('the Server', { type: ActivityType.Watching });
     
-        setInterval(async function() {
+        setInterval(async () => {
             await checksrv()
         }, client.config.autodata.delay * 1000)
     }
