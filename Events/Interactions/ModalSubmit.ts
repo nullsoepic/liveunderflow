@@ -12,10 +12,10 @@ module.exports = {
         if(!interaction.isModalSubmit()) return;
 
         if(interaction.customId === `application`) {
-            let finding = interaction.fields.getTextInputValue(`finding`);
-            let challenges = interaction.fields.getTextInputValue(`challenges`);
+            const finding = interaction.fields.getTextInputValue(`finding`);
+            const challenges = interaction.fields.getTextInputValue(`challenges`);
 
-            let embed = new EmbedBuilder()
+            const embed = new EmbedBuilder()
             .setTitle(`${interaction.member.user.tag} - Application`)
             .addFields(
                 { name: `Finding the IP`, value: finding },
@@ -23,8 +23,8 @@ module.exports = {
             )
             .setTimestamp()
 
-            let cat = client.channels.cache.find(c => c.id === client.config.guild.channels.appcat)
-            let chan = await cat.children.create({
+            const cat = client.channels.cache.find(c => c.id === client.config.guild.channels.appcat)
+            const chan = await cat.children.create({
                 name: `${interaction.member.user.tag}`,
                 type: ChannelType.GuildText,
                 topic: `${interaction.member.user.id}`,
@@ -48,7 +48,7 @@ module.exports = {
                 }]
             })
 
-            let btns = new ActionRowBuilder()
+            const btns = new ActionRowBuilder()
             btns.addComponents(
                 new ButtonBuilder()
                 .setCustomId(`apply:close`)
@@ -65,13 +65,13 @@ module.exports = {
                 .setEmoji(`✅`)
             )
 
-            let m = await chan.send({
+            const m = await chan.send({
                 content: `Thank you for applying **${interaction.member.nickname || interaction.member.user.tag}**!\nYou may be asked some extra questions\nPlease be patient. Thank you!\nUser ID: \`${interaction.member.user.id}\``,
                 embeds: [embed],
                 components: [btns],
             }).catch(console.error);
 
-            let applink = `https://discord.com/channels/${client.config.guild.id}/${chan.id}/${m.id}`;
+            const applink = `https://discord.com/channels/${client.config.guild.id}/${chan.id}/${m.id}`;
 
             await interaction.reply({content: `Thank you for applying! Your application has been sent for review! To view it click **[here](${applink})**`, ephemeral: true})
         }

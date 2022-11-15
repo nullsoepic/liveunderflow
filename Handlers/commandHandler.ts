@@ -6,7 +6,7 @@ export async function loadCommands(client) {
 
     await client.commands.clear()
 
-    let commandsArray: any[] = [];
+    const commandsArray: any[] = [];
 
     const Files = await loadFiles('Commands');
     Files.forEach((file) => {
@@ -20,7 +20,6 @@ export async function loadCommands(client) {
 	} catch (e) {console.log(e)}
     })
 
-    let guild = client.guilds.cache.get(client.config.guild.id);
     client.application.commands.set(commandsArray)
     //guild.commands.set(commandsArray);
 
