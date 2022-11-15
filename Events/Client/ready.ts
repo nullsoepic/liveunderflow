@@ -13,29 +13,26 @@ module.exports = {
 
         async function checksrv() {
             try {
-                let g = await client.guilds.cache.find(g => g.id === client.config.guild.id)
-                let chan = await g.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
-                let ip = client.config.ips.main;
-                let url = `https://api.mcsrvstat.us/2/${ip}`;
+                const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
+                const channel = await guild.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
+                const ip = client.config.ips.main;
+                const url = `https://api.mcsrvstat.us/2/${ip}`;
         
-                axios.get(url)
-                .then(function (res) {
-                    let data = res.data;
-                    if (data.online === false) {
-                        client.user.setStatus('dnd');
-                        client.user.setActivity(`OFFLINE`, {type: ActivityType.Playing});
-                        chan.setName(`🔴 OFFLINE`)
+                const { data } = await axios.get(url)
+                if (!data.online) {
+                    client.user.setStatus('dnd');
+                    client.user.setActivity(`OFFLINE`, { type: ActivityType.Playing });
+                    channel.setName(`🔴 OFFLINE`)
+                } else {
+                    client.user.setActivity(`${data.players.online}/${data.players.max} players`, { type: ActivityType.Watching });
+                    if(data.players.online == data.players.max) {
+                        channel.setName(`🟠 ${data.players.online}/${data.players.max} Players`)
+                        client.user.setStatus('idle');
                     } else {
-                        client.user.setActivity(`${data.players.online}/${data.players.max} players`, { type: ActivityType.Watching });
-                        if(data.players.online == data.players.max) {
-                            chan.setName(`🟠 ${data.players.online}/${data.players.max} Players`)
-                            client.user.setStatus('idle');
-                        } else {
-                            chan.setName(`🟢 ${data.players.online}/${data.players.max} Players`)
-                            client.user.setStatus('online');
-                        }
+                        channel.setName(`🟢 ${data.players.online}/${data.players.max} Players`)
+                        client.user.setStatus('online');
                     }
-                })
+                }
             } catch {
                 console.error
             }
