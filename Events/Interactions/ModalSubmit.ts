@@ -66,7 +66,7 @@ module.exports = {
             )
 
             let m = await chan.send({
-                content: `Thank you for applying **${interaction.member.nickname}**!\nYou may be asked some extra questions\nPlease be patient. Thank you!\nUser ID: \`${interaction.member.user.id}\``,
+                content: `Thank you for applying **${interaction.member.nickname || interaction.member.user.tag}**!\nYou may be asked some extra questions\nPlease be patient. Thank you!\nUser ID: \`${interaction.member.user.id}\``,
                 embeds: [embed],
                 components: [btns],
             }).catch(console.error);

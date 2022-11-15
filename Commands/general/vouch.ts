@@ -24,8 +24,9 @@ module.exports = {
             return true;
         }
 
-        let user = interaction.options.getMember(`user`);
-        if(user.id === interaction.member.id) {
+        const member = interaction.options.getMember(`user`);
+        const { user } = member;
+        if(member.id === interaction.member.id) {
             embed.setTitle(`You can't vouch for yourself!`);
             embed.setColor(`Red`);
             interaction.reply({
@@ -35,12 +36,13 @@ module.exports = {
             return true;
         }
 
-        user.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
+        member.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
         embed.setTitle(`Thanks for vouching!`);
         embed.setDescription(`The member has recieved their role!`);
         embed.setColor(`Green`);
 
         let chan = client.channels.cache.find(c => c.id === client.config.guild.channels.vouchchan)
+        
         chan.send({
             embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} vouched for ${user.tag}**`)]
         })
