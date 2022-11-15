@@ -41,7 +41,7 @@ module.exports = {
         embed.setDescription(`The member has recieved their role!`);
         embed.setColor(`Green`);
 
-        const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.vouchchan)
+        const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
         
         chan.send({
             embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} vouched for ${user.tag}**`)]
