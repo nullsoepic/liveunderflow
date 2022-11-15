@@ -11,7 +11,9 @@ module.exports = {
      * @param {Client} client
      */
     async execute(interaction, client) {
-        await interaction.deferReply()
+        await interaction.deferReply({
+            ephemeral: true
+        })
 
         const embed = new EmbedBuilder()
         const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
@@ -50,7 +52,6 @@ module.exports = {
 
         interaction.editReply({
             embeds: [embed],
-            ephemeral: true
         })
     }
 
