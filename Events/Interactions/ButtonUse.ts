@@ -39,6 +39,8 @@ module.exports = {
                 ]
             })
         }
+        
+        const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
 
         if(interaction.customId === `apply:approve`) {
             if(!interaction.member.roles.cache.find(r => r.id === client.config.rw)) {
@@ -53,6 +55,9 @@ module.exports = {
             interaction.reply({
                 content: `**🥳 Congrats <@${usr.user.id}>! You have been approved for the \`rw\` role!**`
             })
+            chan.send({
+                embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} accepted ${usr.user.tag}'s application**`)]
+            })
         }
 
         if(interaction.customId === `apply:close:confirm`) {
@@ -61,6 +66,9 @@ module.exports = {
             })
             wait(3000)
             interaction.channel.delete()
+            chan.send({
+                embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} deleted channel: ${interaction.channel.name}**`)]
+            })
         }
 
         if(interaction.customId === `apply:close:cancel`) {
