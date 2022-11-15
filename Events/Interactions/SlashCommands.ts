@@ -1,30 +1,24 @@
-const { ChatInputCommandInteraction } = require('discord.js')
+import { ChatInputCommandInteraction } from 'discord.js';
+import { DrippyClient } from '../../Utils/DrippyClient';
 
-module.exports = {
-    name: "interactionCreate",
-    /**
-     * 
-     * @param {ChatInputCommandInteraction} interaction 
-     *
-     */
-    execute(interaction, client) {
-        if(!interaction.isChatInputCommand()) return;
+export const name = "interactionCreate";
+export function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+    if(!interaction.isChatInputCommand()) return;
 
-        const command = client.commands.get(interaction.commandName);
-        if(!command) {
-            return interaction.reply({
-                content: " 🔴 **This command is unavailable**",
-                ephemeral: true
-            });
-        };
+    const command = client.commands.get(interaction.commandName);
+    if(!command) {
+        return interaction.reply({
+            content: " 🔴 **This command is unavailable**",
+            ephemeral: true
+        });
+    };
 
-        if(command.developer && interaction.user.id !== client.config.dev) {
-            return interaction.reply({
-                content: " 🔴 **This command is developer only**",
-                ephemeral: true
-            });
-        };
+    if(command.developer && interaction.user.id !== client.config.dev) {
+        return interaction.reply({
+            content: " 🔴 **This command is developer only**",
+            ephemeral: true
+        });
+    };
 
-        command.execute(interaction, client);
-    }
+    command.execute(interaction, client);
 }

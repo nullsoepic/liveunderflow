@@ -1,14 +1,14 @@
-const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
+import { GatewayIntentBits, Partials, Collection } from 'discord.js';
+import { loadEvents } from './Handlers/eventHandler';
+import { DrippyClient } from './Utils/DrippyClient';
+
 const { Guilds, GuildMessages, GuildMembers } = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 // Create Client with intents and partials
-const client = new Client({
+const client = new DrippyClient({
     intents: [Guilds, GuildMessages, GuildMembers],
     partials: [User, Message, GuildMember, ThreadMember ]
 });
-
-// Require handlers
-const { loadEvents } = require('./Handlers/eventHandler');
 
 client.config = require("./config.json");
 
