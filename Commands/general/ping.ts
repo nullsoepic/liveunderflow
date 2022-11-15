@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, Client } = require('discord.js')
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
      */
     async execute(interaction, client) {
         const date = Date.now()
-        let embed = new EmbedBuilder()
+        const embed = new EmbedBuilder()
         .setTitle('🟢 Pong!')
         .setDescription(`**< Ping >** \n${date - interaction.createdTimestamp}ms`)
         .setColor('Green')

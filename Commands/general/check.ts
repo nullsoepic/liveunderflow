@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, Client } = require('discord.js')
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,7 +19,7 @@ module.exports = {
         }
 
         const ip = interaction.options.getString("ip")
-        let embed = new EmbedBuilder()
+        const embed = new EmbedBuilder()
         if(ip.includes(client.config.ips.main)) {
             embed.setTitle("✅ Correct IP! Congrats!")
         } else if(ip.includes(client.config.ips.n00b)) {

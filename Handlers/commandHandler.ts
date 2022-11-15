@@ -1,11 +1,12 @@
-async function loadCommands(client) {
-    const { loadFiles } = require('../Functions/fileLoader');
+import { loadFiles } from "../Functions/fileLoader";
+
+export async function loadCommands(client) {
     const ascii = require('ascii-table');
     const table = new ascii().setHeading('Commands', 'Status');
 
     await client.commands.clear()
 
-    let commandsArray = [];
+    const commandsArray: any[] = [];
 
     const Files = await loadFiles('Commands');
     Files.forEach((file) => {
@@ -19,13 +20,8 @@ async function loadCommands(client) {
 	} catch (e) {console.log(e)}
     })
 
-    let guild = client.guilds.cache.get(client.config.guild.id);
     client.application.commands.set(commandsArray)
     //guild.commands.set(commandsArray);
 
     return console.log(table.toString(), '\n 🟢 - Commands Loaded')
-}
-
-module.exports = {
-    loadCommands
 }

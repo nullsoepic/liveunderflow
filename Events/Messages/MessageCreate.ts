@@ -1,5 +1,3 @@
-const fs = require('fs')
-
 module.exports = {
     name: "messageCreate",
     execute(message, client) {
