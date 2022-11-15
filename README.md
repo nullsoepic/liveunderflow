@@ -74,4 +74,4 @@ Project Link: [https://github.com/nullsoepic/liveunderflow](https://github.com/n
 [issues-shield]: https://img.shields.io/github/issues/nullsoepic/liveunderflow.svg?style=for-the-badge
 [issues-url]: https://github.com/nullsoepic/liveunderflow
 [license-shield]: https://img.shields.io/github/license/nullsoepic/liveunderflow.svg?style=for-the-badge
-[license-url]: https://github.com/nullsoepic/liveunderflow/blob/main/LICENSE
+[license-url]: https://github.com/nullsoepic/liveunderflow/blob/main/LICENSE.MD
