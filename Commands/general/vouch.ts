@@ -40,7 +40,7 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
     embed.setDescription(`The member has recieved their role!`);
     embed.setColor(`Green`);
 
-    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.vouchchan)
+    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
     //@ts-ignore
     chan?.send({
         //@ts-ignore

@@ -9,9 +9,9 @@ export type Config = {
     guild: {
         id: string,
         channels: {
-            vouchchan: string,
+            logchan: string,
             appcat: string,
-            statchan: string
+            statchan: string,
         },
         roles: {
             rwx: string,

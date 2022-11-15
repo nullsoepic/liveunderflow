@@ -38,7 +38,7 @@ export async function execute(interaction, client: DrippyClient) {
 
     if(interaction.customId === `apply:approve`) {
         if(!interaction.member.roles.cache.find(r => r.id === client.config.guild.roles.rw)) {
-            wait(3000)
+            await wait(3000)
             interaction.channel.delete()
             if(chan instanceof TextChannel) chan?.send({
                 embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} deleted channel: ${interaction.channel.name}**`)]
@@ -61,7 +61,7 @@ export async function execute(interaction, client: DrippyClient) {
         interaction.reply({
             content: `**Deletion Confirmed** - Deleting channel - <@${interaction.member.user.id}>`
         })
-        wait(3000)
+        await wait(3000)
         interaction.channel.delete()
     }
 
