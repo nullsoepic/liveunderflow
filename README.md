@@ -39,6 +39,16 @@ https://github.com/othneildrew/Best-README-Template
 The code is not very clean, we hope to resolve this problem in the future.
 
 
+<!-- TO DO -->
+<br />
+
+## To Do List
+
+- [X] Core discord bot features.
+- [X] Rewrite in TypeScript.
+- [ ] https://github.com/nullsoepic/liveunderflow/issues/3
+
+
 <!-- LICENSE -->
 <br />
 
