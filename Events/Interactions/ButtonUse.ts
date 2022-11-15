@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits, EmbedBuilder, TextChannel } from 'discord.js';
 import { setTimeout } from 'node:timers/promises';
 import { DrippyClient } from '../../Utils/DrippyClient';
 const wait = setTimeout;
@@ -6,6 +6,7 @@ const wait = setTimeout;
 export const name = "interactionCreate";
 export async function execute(interaction, client: DrippyClient) {
     if(!interaction.isButton()) return;
+    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
 
     if(interaction.customId === `apply:close`) {
         if(!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
@@ -37,6 +38,12 @@ export async function execute(interaction, client: DrippyClient) {
 
     if(interaction.customId === `apply:approve`) {
         if(!interaction.member.roles.cache.find(r => r.id === client.config.guild.roles.rw)) {
+            wait(3000)
+            interaction.channel.delete()
+            if(chan instanceof TextChannel) chan?.send({
+                embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} deleted channel: ${interaction.channel.name}**`)]
+            })
+
             return interaction.reply({
                 content: `You are not allowed to approve users for the RW role`,
                 ephemeral: true

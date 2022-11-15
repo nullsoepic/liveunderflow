@@ -6,6 +6,7 @@ export const data = new SlashCommandBuilder()
     .setDescription('Vouch for someone else to get the rw role!')
     .addUserOption((o) => o.setName(`user`).setDescription(`Who do you want to vouch for?`).setRequired(true))
 
+
 export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
     const embed = new EmbedBuilder()
     
