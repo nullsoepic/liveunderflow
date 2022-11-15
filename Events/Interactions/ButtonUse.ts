@@ -1,4 +1,4 @@
-const { Client, ButtonInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits, messageLink } = require('discord.js')
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } from 'discord.js';
 const wait = require('node:timers/promises').setTimeout;
 
 

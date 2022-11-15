@@ -1,6 +1,6 @@
 const { loadCommands } = require('../../Handlers/commandHandler');
 const axios = require('axios');
-const { ActivityType, Client } = require(`discord.js`)
+import { ActivityType } from 'discord.js';
 
 module.exports = {
     name: "ready",

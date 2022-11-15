@@ -1,6 +1,4 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder, Client,
-    ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle,
-    EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
