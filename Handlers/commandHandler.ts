@@ -22,9 +22,15 @@ export async function loadCommands(client: DrippyClient) {
             console.error(error)
         }
     })
-
-    client.application?.commands.set(commandsArray)
-    //guild.commands.set(commandsArray);
+    
+    // ~ Un-comment this for global commands
+    // ! Make sure to comment out the guild commands code
+    // This bot is not intended to be used with global commands
+    // Enabling global commands WILL cause issues
+    //client.application?.commands.set(commandsArray)
+    
+    const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
+    guild?.commands.set(commandsArray);
 
     return console.log(table.toString(), '\n 🟢 - Commands Loaded')
 }
