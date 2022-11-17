@@ -12,11 +12,19 @@ export type Config = {
             logchan: string,
             appcat: string,
             statchan: string,
+            chat_relay: string
         },
         roles: {
             rwx: string,
             rw: string
         }
+    },
+    "in-game-bot": {
+        enabled: boolean,
+        logJoins: boolean,
+        logLeaves: boolean,
+        logChat: boolean,
+        webhookURL: string
     },
     autodata: {
         delay: number
@@ -25,5 +33,6 @@ export type Config = {
         enabled: boolean,
         time: number
     },
-    filter: string[]
+    filter: string[],
+    
 }

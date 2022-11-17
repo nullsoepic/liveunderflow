@@ -11,12 +11,20 @@
         "channels": {
             "logchan": "log-channel",
             "appcat": "application-category",
-            "statchan": "status-voice-channel"
+            "statchan": "status-voice-channel",
+            "chat_relay": "chat-relay-channel"
         },
         "roles": {
             "rwx": "moderator-role-id",
             "rw": "solutions-role-id"
         }
+    },
+    "in-game-bot": {
+        "enabled": true,
+        "logJoins": true,
+        "logLeaves": true,
+        "logChat": true,
+        "webhookURL": "discord-webhook-URL"
     },
     "autodata": {
         "delay": 30
