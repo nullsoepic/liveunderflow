@@ -10,4 +10,8 @@ export class PlayerAPI {
     getHeadPictureURL() {
         return `https://mc-heads.net/avatar/${this.uuid}`;
     }
+
+    getHeadPictureURLByName(username: string) {
+        return `https://mc-heads.net/avatar/${username}`;
+    }
 }

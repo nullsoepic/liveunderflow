@@ -1,6 +1,11 @@
 import { DrippyClient } from "../Utils/DrippyClient"
 import { PlayerAPI } from "./PlayerAPI";
 
+process.on('uncaughtException', (error) => {
+    if(error.message.includes('play.toClient')) return;
+    throw error;
+})
+
 export function HandleChat(client: DrippyClient) {
     const { bot } = client;
     bot.on('system_chat', (data) => {
@@ -10,18 +15,23 @@ export function HandleChat(client: DrippyClient) {
         const hoverEvent = raw?.with ? raw?.with[0]?.hoverEvent : undefined
         const { id } = hoverEvent?.contents || { };
         const player = new PlayerAPI(id)
-        
-        if(color !== 'yellow' || !translate || !username || !id) return;
 
         switch(translate) {
             case 'multiplayer.player.joined':
-                client.sendEmbedMessage(client.config.guild.channels.chat_relay, username, `${username} has joined the game.`, player.getHeadPictureURL(), '#00ff00')
+                if(color !== 'yellow' || !translate || !username || !id) return;
+                client.sendEmbedMessage(client.config.guild.channels.chat_relay, username, `${username} has joined the game.`, player.getHeadPictureURL(), '#00ff00');
                 break;
             case 'multiplayer.player.left':
-                client.sendEmbedMessage(client.config.guild.channels.chat_relay, username, `${username} has left the game.`, player.getHeadPictureURL(), '#9d3838')
+                if(color !== 'yellow' || !translate || !raw.with) return;
+                client.sendEmbedMessage(client.config.guild.channels.chat_relay, raw?.with[0]?.text, `${raw?.with[0]?.text} has left the game.`, player.getHeadPictureURLByName(raw?.with[0]?.text), '#9d3838');
+                break;
+            case 'sleep.players_sleeping':
+                if(!translate || !raw.with) return;
+                client.sendEmbedMessage(client.config.guild.channels.chat_relay, `Sleeper count has changed!`, `There are now ${raw.with.join('/')} players sleeping.`, 'https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj', '#c2c5cc');
                 break;
         }
     })
 
     bot.on('chat', console.log)
+    bot.on('player_chat', console.log)
 }

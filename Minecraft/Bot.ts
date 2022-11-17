@@ -9,7 +9,7 @@ export function HandleMinecraft(client: DrippyClient) {
         port: 25565,
         username: 'sysctl',
         profilesFolder: __dirname + '\\auth',
-        auth: 'microsoft'
+        auth: 'microsoft',
     })
 
     client.bot.on('disconnect', (packet) => {

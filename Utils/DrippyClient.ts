@@ -20,6 +20,8 @@ export class DrippyClient extends Client {
     }
 
     sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
+        picture = picture || "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj"
+
         const channel = this.getTextChannel(location)
         const embed = new EmbedBuilder({
             author: {
@@ -30,7 +32,7 @@ export class DrippyClient extends Client {
         })
 
         embed.setColor(color)
-
+        
         channel.send({
             embeds: [ embed ]
         })
