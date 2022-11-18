@@ -4,7 +4,7 @@ import * as mc from 'minecraft-protocol';
 
 
 export class DrippyBlockClient extends Client {
-    playerManager?: PlayerManager;
+    playerManager: PlayerManager;
     options: ClientOptions;
 }
 

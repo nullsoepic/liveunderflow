@@ -31,7 +31,9 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         } else {
             client.user?.setActivity(`${data.players.online}/${data.players.max} players`, { type: ActivityType.Watching });
             embed.setTitle(`LiveOverflow SMP • ${data.players.online}/${data.players.max}`)
-            embed.setDescription(`Current server status`)
+            embed.setDescription(client.config['in-game-bot'].enabled ? `Online Players:\n${Array.from(client.bot.playerManager.getPlayers().values()).map((player) => player.name).join('\n - ')}` : `Current server status.`)
+
+
             if(data.players.online >= data.players.max) {
                 channel?.setName(`🟠 ${data.players.online}/${data.players.max} Players`)
                 client.user?.setStatus('idle');

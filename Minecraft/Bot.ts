@@ -4,6 +4,7 @@ import { HandleChat } from "./Chat";
 import { PlayerManager } from "./PlayerManager";
 
 export function HandleMinecraft(client: DrippyClient) {
+    if(!client.config["in-game-bot"].enabled) return;
     client.bot = createClient({
         host: client.config.ips.n00b,
         port: 25565,
@@ -12,6 +13,8 @@ export function HandleMinecraft(client: DrippyClient) {
         auth: 'microsoft',
         disableChatSigning: true,
     })
+
+    client.bot.playerManager = new PlayerManager(client.bot);
 
     client.bot.on('disconnect', (packet) => {
         console.log('Disconnected from server : ' + packet.reason)
