@@ -5,30 +5,40 @@ import { PlayerManager } from "./PlayerManager";
 
 export function HandleMinecraft(client: DrippyClient) {
     client.bot = createClient({
-        host: client.config.ips.main,
+        host: client.config.ips.n00b,
         port: 25565,
         username: 'sysctl',
         profilesFolder: __dirname + '\\auth',
         auth: 'microsoft',
+        disableChatSigning: true,
     })
 
     client.bot.on('disconnect', (packet) => {
         console.log('Disconnected from server : ' + packet.reason)
+        ReconnectToServer(client);
     })
       
     client.bot.on('end', () => {
         console.log('Connection lost')
-        process.exit()
+        ReconnectToServer(client);
     })
       
-    client.bot.on('error',  (err) => {
+    client.bot.on('error', (err) => {
+        if(err.message.includes('play.toClient')) return;
         console.log('Error occurred')
         console.log(err)
-        process.exit(1)
     })
     
     client.bot.on('connect', () => {
         console.log(`Connected to Server...`)
         HandleChat(client);
     })
+}
+
+function ReconnectToServer(client: DrippyClient) {
+    console.log('Reconnecting in 3 seconds...')
+    setTimeout(() => {
+        console.log('Attempting to connect...')
+        client.bot = createClient(client.bot.options)
+    }, 1000 * 3)
 }

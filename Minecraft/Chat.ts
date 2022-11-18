@@ -1,13 +1,18 @@
 import { DrippyClient } from "../Utils/DrippyClient"
 import { PlayerAPI } from "./PlayerAPI";
 
-process.on('uncaughtException', (error) => {
-    if(error.message.includes('play.toClient')) return;
-    throw error;
-})
-
 export function HandleChat(client: DrippyClient) {
     const { bot } = client;
+
+    bot.on('player_chat', (data) => {
+        let name = JSON.parse(data.networkName).text
+        name.length ? name = name : name = JSON.parse(data.networkName)?.extra[2]?.text;
+        if(name === bot.username) return;
+        
+        const player = new PlayerAPI(data.senderUuid)
+        client.sendWebHookMessage(data.plainMessage, player.getHeadPictureURL(), name)
+    })
+
     bot.on('system_chat', (data) => {
         const raw = JSON.parse(data.content)
         const { color, translate } = raw;
@@ -32,6 +37,18 @@ export function HandleChat(client: DrippyClient) {
         }
     })
 
-    bot.on('chat', console.log)
-    bot.on('player_chat', console.log)
+    client.on('messageCreate', (message) => {
+        if(message.author.bot) return;
+        if(message.channel.id !== client.config.guild.channels.chat_relay) return;
+
+        bot.write('chat_message', {
+            message: message.author.tag + ' > ' + message.content,
+            timestamp: BigInt(Date.now()),
+            salt: 0,
+            signature: Buffer.alloc(0),
+            signedPreview: false,
+            previousMessages: [],
+            lastMessage: null
+        })
+    })
 }

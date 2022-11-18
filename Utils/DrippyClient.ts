@@ -11,10 +11,11 @@ export class DrippyClient extends Client {
     bot: DrippyBlockClient;
     webhook: WebhookClient;
 
-    sendWebHookMessage(message: string, picture: string = "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj") {
+    sendWebHookMessage(message: string, picture: string = "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj", username?: string) {
         this.webhook.send({
             content: message,
             avatarURL: picture,
+            username: username,
             allowedMentions: { parse: [] }
         })
     }

@@ -5,8 +5,11 @@ import * as mc from 'minecraft-protocol';
 
 export class DrippyBlockClient extends Client {
     playerManager?: PlayerManager;
+    options: ClientOptions;
 }
 
 export function createClient(options: ClientOptions)  {
-    return mc.createClient(options) as DrippyBlockClient
+    const bot = mc.createClient(options) as DrippyBlockClient
+    bot.options = options
+    return bot;
 }
