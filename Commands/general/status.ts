@@ -1,6 +1,9 @@
-import { SlashCommandBuilder, EmbedBuilder, ActivityType, ChatInputCommandInteraction } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, ActivityType, ChatInputCommandInteraction, AttachmentBuilder } from 'discord.js';
 import axios from 'axios';
 import { DrippyClient } from '../../Utils/DrippyClient';
+import { read, MIME_PNG } from 'jimp';
+import { Player } from '../../Minecraft/Player';
+import { groupByN } from '../../Utils/Sort';
 
 export const data = new SlashCommandBuilder()
     .setName('status')
@@ -31,7 +34,8 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         } else {
             client.user?.setActivity(`${data.players.online}/${data.players.max} players`, { type: ActivityType.Watching });
             embed.setTitle(`LiveOverflow SMP • ${data.players.online}/${data.players.max}`)
-            embed.setDescription(client.config['in-game-bot'].enabled ? `Online Players:\n${Array.from(client.bot.playerManager.getPlayers().values()).map((player) => player.name).join('\n - ')}` : `Current server status.`)
+            if(client.config['in-game-bot'].enabled) embed.setImage(`attachment://tab.png`)
+            else embed.setDescription(`Current server status.`)
 
 
             if(data.players.online >= data.players.max) {
@@ -48,7 +52,31 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         console.error(error)
     }
 
-    interaction.editReply({
+    if(client.config['in-game-bot'].enabled) interaction.editReply({
+        embeds: [embed],
+        files: [await renderTabImage(client.bot.playerManager.getPlayerArray())]
+    })
+    else interaction.editReply({
         embeds: [embed],
     })
+}
+
+async function renderTabImage(players: Player[]) {
+    const grouping = groupByN(10, players).filter((row) => row.filter(player => !player.name.startsWith('N00bBot')));
+    const canvas = await read(2000, (grouping.length * 180) + grouping.length * 20, '#36393e');
+    
+    for(var i = 0; i < grouping.length; i++) {
+        const group = grouping[i];
+        for(var l = 0; l < group.length; l++) {
+            const player = group[l];
+
+            const image = await player.downloadImage();
+            if(!image) continue;
+            const mathX = (l * 180) + (l * 20);
+            const mathY = (i * 180) + (i * 20);
+            canvas.composite(image, mathX, mathY);
+        }
+    }
+    const imageBuffer = await canvas.getBufferAsync(MIME_PNG);
+    return new AttachmentBuilder(imageBuffer, { name: 'tab.png' })
 }

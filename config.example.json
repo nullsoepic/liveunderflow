@@ -24,7 +24,13 @@
         "logJoins": true,
         "logLeaves": true,
         "logChat": true,
-        "webhookURL": "discord-webhook-URL"
+        "webhookURL": "discord-webhook-URL",
+        "muted": [
+            {
+                "name": "grief_ing",
+                "reason": "some f'ing bot spamming random lines in chat."
+            }
+        ]
     },
     "autodata": {
         "delay": 30

@@ -8,6 +8,7 @@ export function HandleChat(client: DrippyClient) {
         let name = JSON.parse(data.networkName).text
         name.length ? name = name : name = JSON.parse(data.networkName)?.extra[2]?.text;
         if(name === bot.username) return;
+        if(client.config["in-game-bot"].muted.find((entry) => entry.name === name)) return;
         
         const player = new PlayerAPI(data.senderUuid)
         client.sendWebHookMessage(data.plainMessage, player.getHeadPictureURL(), name)

@@ -24,7 +24,8 @@ export type Config = {
         logJoins: boolean,
         logLeaves: boolean,
         logChat: boolean,
-        webhookURL: string
+        webhookURL: string,
+        muted: Muted[]
     },
     autodata: {
         delay: number
@@ -35,4 +36,9 @@ export type Config = {
     },
     filter: string[],
     
+}
+
+interface Muted {
+    name: string
+    reason: string
 }

@@ -15,7 +15,9 @@ export class PlayerManager {
             const { data } = packet;
             switch(packet.action) {
                 case 0:
-                    this.players.set(data[0]?.UUID, new Player(data[0]?.name, data[0]?.uuid))
+                    const player = new Player(data[0]?.name, data[0]?.uuid)
+                    this.players.set(data[0]?.UUID, player)
+                    player.downloadImage();
                     break;
                 case 4:
                     this.players.delete(data[0]?.UUID)
@@ -26,5 +28,9 @@ export class PlayerManager {
 
     getPlayers() {
         return this.players;
+    }
+
+    getPlayerArray() {
+        return Array.from(this.getPlayers().values());
     }
 }
