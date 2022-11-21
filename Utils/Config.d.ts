@@ -34,8 +34,7 @@ export type Config = {
         enabled: boolean,
         time: number
     },
-    filter: string[],
-    
+    filter: string[]
 }
 
 interface Muted {
