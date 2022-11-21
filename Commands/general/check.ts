@@ -20,7 +20,7 @@ export function execute(interaction: ChatInputCommandInteraction, client: Drippy
     const ip = interaction.options.getString("ip") || "null"
     const embed = new EmbedBuilder()
 
-    embed.setTitle(`${ip.includes(client.config.ips.main) ? "✅ Correct IP! Congrats!" : ip.includes(client.config.ips.n00b) ? "✅ N00bBot Proxy Found!" : "❌ Incorrect IP! Keep searching!"}`)
+    embed.setTitle(`${ip.includes(client.config.ips.main) ? "✅ Correct IP! Congrats!" : (ip.includes(client.config.ips.n00b) ? "✅ N00bBot Proxy Found!" : "❌ Incorrect IP! Keep searching!")}`)
 
     client.cooldowns = [...client.cooldowns, `${user.tag}`]
     setTimeout(() => {
