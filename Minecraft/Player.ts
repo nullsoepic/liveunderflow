@@ -7,12 +7,15 @@ export class Player {
 
     constructor(name: string, uuid: string) {
         this.name = name;
-        this.uuid = uuid
+        this.uuid = uuid;
     }
 
+    // Downloads the player's head picture and returns it
     async downloadImage() {
-        if(this.image) return this.image;
-        this.image = await read(`https://mc-heads.net/avatar/${this.uuid || this.name}`);
+        if (this.image) return this.image; // If the image is already downloaded, return it
+        this.image = await read(
+            `https://mc-heads.net/avatar/${this.uuid || this.name}`
+        );
         return this.image;
     }
 }
