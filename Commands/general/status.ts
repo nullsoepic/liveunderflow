@@ -1,7 +1,8 @@
-import { SlashCommandBuilder, EmbedBuilder, ActivityType, ChatInputCommandInteraction, AttachmentBuilder } from 'discord.js';
 import axios from 'axios';
+import { resolve } from 'path';
+import { SlashCommandBuilder, EmbedBuilder, ActivityType, ChatInputCommandInteraction, AttachmentBuilder } from 'discord.js';
 import { DrippyClient } from '../../Utils/DrippyClient';
-import { read, MIME_PNG } from 'jimp';
+import Jimp, { read, MIME_PNG } from 'jimp';
 import { Player } from '../../Minecraft/Player';
 import { groupByN } from '../../Utils/Sort';
 
@@ -62,8 +63,12 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
 }
 
 async function renderTabImage(players: Player[]) {
-    const grouping = groupByN(10, players).filter((row) => row.filter(player => !player.name.startsWith('N00bBot')));
-    const canvas = await read(2000, (grouping.length * 180) + grouping.length * 20, '#36393e');
+    players = players.filter((player) => !player.name.startsWith('N00bBot'));
+    
+    const rows = 5;
+    const grouping = groupByN(rows, players)
+    const canvas = await read((rows * 180) + (rows * 20), (grouping.length * 180) + grouping.length * 60, '#36393F');
+    const font = await Jimp.loadFont(resolve('./Minecraft/Font/xsJGJPdTmfYtAZNHX7Kk5tfJ.ttf.fnt'));
     
     for(var i = 0; i < grouping.length; i++) {
         const group = grouping[i];
@@ -72,11 +77,18 @@ async function renderTabImage(players: Player[]) {
 
             const image = await player.downloadImage();
             if(!image) continue;
-            const mathX = (l * 180) + (l * 20);
-            const mathY = (i * 180) + (i * 20);
+            const mathX = (l * 180) + (l * 20) + 10;
+            const mathY = (i * 180) + (i * 60) + 30;
             canvas.composite(image, mathX, mathY);
+            const layer = await Jimp.read(Math.round(25 * player.name.length), 180);
+            const text = layer.print(font, 0, 0, player.name, 180, 180);
+            text.color([{ apply: 'xor', params: ['#FFFFFF'] }]); 
+            text.scaleToFit(205, 100);
+            canvas.composite(text, mathX, player.name.length > 8 ? mathY - 45 : mathY - 25);
+            //text.resize(Math.round(22.5 * player.name.length), 25);
         }
     }
+
     const imageBuffer = await canvas.getBufferAsync(MIME_PNG);
     return new AttachmentBuilder(imageBuffer, { name: 'tab.png' })
 }
