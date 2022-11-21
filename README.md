@@ -47,6 +47,7 @@ The code is not very clean, we hope to resolve this problem in the future.
 - [X] Core discord bot features.
 - [X] Rewrite in TypeScript.
 - [ ] https://github.com/nullsoepic/liveunderflow/issues/3
+- [ ] #6
 
 
 <!-- LICENSE -->
