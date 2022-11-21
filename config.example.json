@@ -9,9 +9,9 @@
     "guild": {
         "id": "guild-id",
         "channels": {
-            "logchan": "log-channel",
-            "appcat": "application-category",
-            "statchan": "status-voice-channel"
+            "logchan": "log-channel-id",
+            "appcat": "application-category-id",
+            "statchan": "status-voice-channel-id"
         },
         "roles": {
             "rwx": "moderator-role-id",
