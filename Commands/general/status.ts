@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { resolve } from 'path';
 import { SlashCommandBuilder, EmbedBuilder, ActivityType, ChatInputCommandInteraction, AttachmentBuilder } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 import Jimp, { read, MIME_PNG } from 'jimp';
 import { Player } from '../../Minecraft/Player';
 import { groupByN } from '../../Utils/Sort';
@@ -10,7 +10,7 @@ export const data = new SlashCommandBuilder()
     .setName('status')
     .setDescription('Check the server status!');
 
-export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     await interaction.deferReply({
         ephemeral: true
     })

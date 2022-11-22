@@ -1,14 +1,14 @@
 import { Client, Collection, ColorResolvable, EmbedBuilder, SlashCommandBuilder, TextChannel, WebhookClient } from "discord.js";
 import { Config } from "./Config";
-import { DrippyBlockClient } from "./DrippyBlockClient";
+import { MinecraftClient } from "./MinecraftClient";
 
 // Vibe added made custom properties on the Client which works well... Until I transfered this project to typescript and now no types so this should fix it.
-export class DrippyClient extends Client {
+export class DiscordClient extends Client {
     config: Config;
     events: Collection<string, (...args) => Function>;
     commands: Collection<string, Command>;
     cooldowns: string[];
-    bot: DrippyBlockClient;
+    bot: MinecraftClient;
     webhook: WebhookClient;
 
     sendWebHookMessage(message: string, picture: string = "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj", username?: string) {

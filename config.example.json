@@ -32,6 +32,9 @@
             }
         ]
     },
+    "constants": {
+        "defaultProfile": "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj"
+    },
     "autodata": {
         "delay": 30
     },

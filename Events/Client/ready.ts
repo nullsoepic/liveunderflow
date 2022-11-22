@@ -1,11 +1,11 @@
 import { loadCommands } from '../../Handlers/commandHandler';
 import axios from 'axios';
 import { ActivityType } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const name = "ready";
 export const once = true;
-export async function execute(client: DrippyClient) {
+export async function execute(client: DiscordClient) {
     async function checksrv() {
         try {
             const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)

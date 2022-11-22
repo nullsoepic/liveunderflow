@@ -1,11 +1,11 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import { DrippyClient } from "../../Utils/DrippyClient";
+import { DiscordClient } from "../../Utils/DiscordClient";
 
 export const data = new SlashCommandBuilder()
     .setName('apply')
     .setDescription('Apply for the rw role!')
 
-export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const modal = new ModalBuilder()
         .setCustomId(`application`)
         .setTitle(`RW Application`);

@@ -1,9 +1,9 @@
-import { createClient } from '../Utils/DrippyBlockClient';
-import { DrippyClient } from '../Utils/DrippyClient';
+import { createClient } from '../Utils/MinecraftClient';
+import { DiscordClient } from '../Utils/DiscordClient';
 import { HandleChat } from './Chat';
 import { PlayerManager } from './PlayerManager';
 
-export function HandleMinecraft(client: DrippyClient) {
+export function HandleMinecraft(client: DiscordClient) {
     if (!client.config['in-game-bot'].enabled) return; // Returns if there is no bot config
     client.bot = createClient({
         host: client.config.ips.n00b,
@@ -39,7 +39,7 @@ export function HandleMinecraft(client: DrippyClient) {
 }
 
 // Waits 3 seconds and tries to reconnect to the server
-function ReconnectToServer(client: DrippyClient) {
+function ReconnectToServer(client: DiscordClient) {
     console.log('Reconnecting in 3 seconds...');
     setTimeout(() => {
         console.log('Attempting to connect...');

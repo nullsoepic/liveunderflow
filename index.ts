@@ -1,12 +1,12 @@
 import { GatewayIntentBits, Partials, Collection, WebhookClient } from 'discord.js';
 import { loadEvents } from './Handlers/eventHandler';
 import { HandleMinecraft } from './Minecraft/Bot';
-import { DrippyClient } from './Utils/DrippyClient';
+import { DiscordClient } from './Utils/DiscordClient';
 
 const { Guilds, GuildMessages, GuildMembers, MessageContent } = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 // Create Client with intents and partials
-const client = new DrippyClient({
+const client = new DiscordClient({
     intents: [ Guilds, GuildMessages, GuildMembers, GuildMessages, MessageContent ],
     partials: [User, Message, GuildMember, ThreadMember ],
     allowedMentions: { parse: [] }

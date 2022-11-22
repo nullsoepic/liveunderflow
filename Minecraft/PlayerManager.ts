@@ -1,13 +1,13 @@
-import { DrippyBlockClient } from '../Utils/DrippyBlockClient';
-import { DrippyClient } from '../Utils/DrippyClient';
+import { MinecraftClient } from '../Utils/MinecraftClient';
+import { DiscordClient } from '../Utils/DiscordClient';
 import { Player } from './Player';
 
 export class PlayerManager {
     public packetName: string;
-    private bot: DrippyBlockClient;
+    private bot: MinecraftClient;
     private players: Map<string, Player>;
 
-    constructor(client: DrippyBlockClient) {
+    constructor(client: MinecraftClient) {
         this.bot = client;
         this.players = new Map();
 

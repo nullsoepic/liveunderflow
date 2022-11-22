@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const name = "interactionCreate";
-export function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     if(!interaction.isChatInputCommand()) return;
 
     const command = client.commands.get(interaction.commandName);

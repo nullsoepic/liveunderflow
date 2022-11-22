@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
     .setName('vouch')
@@ -7,7 +7,7 @@ export const data = new SlashCommandBuilder()
     .addUserOption((o) => o.setName(`user`).setDescription(`Who do you want to vouch for?`).setRequired(true))
 
 
-export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const embed = new EmbedBuilder()
     
     if(!interaction.guild?.roles.cache.some(r => r.id === client.config.guild.roles.rw)) {

@@ -1,9 +1,9 @@
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChannelType, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, CategoryChannel } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const name = "interactionCreate";
-export async function execute(interaction, client: DrippyClient) {
+export async function execute(interaction, client: DiscordClient) {
     if(!interaction.isModalSubmit()) return;
 
     if(interaction.customId === `application`) {

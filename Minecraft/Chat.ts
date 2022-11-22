@@ -1,7 +1,7 @@
-import { DrippyClient } from '../Utils/DrippyClient';
+import { DiscordClient } from '../Utils/DiscordClient';
 import { PlayerAPI } from './PlayerAPI';
 
-export function HandleChat(client: DrippyClient) {
+export function HandleChat(client: DiscordClient) {
     const { bot } = client;
 
     // Detects when a player sends a message in minecraft chat

@@ -1,7 +1,7 @@
-import { DrippyClient } from "../../Utils/DrippyClient"
+import { DiscordClient } from "../../Utils/DiscordClient"
 
 export const name = "messageCreate"
-export function execute(message, client: DrippyClient) {
+export function execute(message, client: DiscordClient) {
 	if(blacklist(message.content)) {
 		message.delete()
 		message.channel.send({content: `:x: Your message contained a blacklisted phase ${message.member.tag}`})

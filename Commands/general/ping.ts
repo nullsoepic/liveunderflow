@@ -1,11 +1,11 @@
 import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
     .setName('ping')
     .setDescription('A simple ping command!')
 
-export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const date = Date.now()
     const embed = new EmbedBuilder()
     .setTitle('🟢 Pong!')

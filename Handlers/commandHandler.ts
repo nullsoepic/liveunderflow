@@ -1,7 +1,7 @@
 import { loadFiles } from "../Functions/fileLoader";
-import { DrippyClient } from "../Utils/DrippyClient";
+import { DiscordClient } from "../Utils/DiscordClient";
 
-export async function loadCommands(client: DrippyClient) {
+export async function loadCommands(client: DiscordClient) {
     const ascii = require('ascii-table');
     const table = new ascii().setHeading('Commands', 'Status');
 
