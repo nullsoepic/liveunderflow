@@ -9,10 +9,10 @@
     "guild": {
         "id": "guild-id",
         "channels": {
-            "logchan": "log-channel",
-            "appcat": "application-category",
-            "statchan": "status-voice-channel",
-            "chat_relay": "chat-relay-channel"
+            "logchan": "log-channel-id",
+            "appcat": "application-category-id",
+            "statchan": "status-voice-channel-id",
+            "chat_relay": "chat-relay-channel-id"
         },
         "roles": {
             "rwx": "moderator-role-id",
