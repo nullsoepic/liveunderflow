@@ -27,6 +27,9 @@ export type Config = {
         webhookURL: string,
         muted: Muted[]
     },
+    constants: {
+        defaultProfile: string
+    },
     autodata: {
         delay: number
     },
@@ -38,6 +41,6 @@ export type Config = {
 }
 
 interface Muted {
-    name: string
-    reason: string
+    name: string;
+    reason: string;
 }
