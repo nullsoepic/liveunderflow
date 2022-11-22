@@ -19,7 +19,7 @@
     "glob": "^8.0.3",
     "isomorphic-unfetch": "^3.1.0",
     "jimp": "^0.16.2",
-    "minecraft-protocol": "github:jtsiskin/node-minecraft-protocol"
+    "minecraft-protocol": "github:jtsiskin/node-minecraft-protocol#47cb103"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
