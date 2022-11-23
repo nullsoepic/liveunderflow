@@ -8,7 +8,7 @@ https://github.com/othneildrew/Best-README-Template
 <br />
 <p align="center">
 <a href="https://github.com/nullsoepic/liveunderflow">
-    <img src="https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj" alt="LiveOverflow Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/nullsoepic/liveunderflow/main/Media/Logo.jpg" alt="LiveOverflow Logo" width="80" height="80">
   </a>
   <h3 align="center"><u>LiveUnderflow Discord Bot</u></h3>
 
