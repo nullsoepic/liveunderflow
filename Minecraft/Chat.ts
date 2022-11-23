@@ -1,7 +1,7 @@
 import { DiscordClient } from '../Utils/DiscordClient';
 import { PlayerManager } from './PlayerManager';
 
-export function HandleChat(client: DiscordClient) {
+export function handleChat(client: DiscordClient) {
     const { bot } = client;
 
     // Detects when a player sends a message in minecraft chat

@@ -1,6 +1,6 @@
 import { GatewayIntentBits, Partials, Collection, WebhookClient } from 'discord.js';
 import { loadEvents } from './Handlers/eventHandler';
-import { HandleMinecraft } from './Minecraft/Bot';
+import { handleMinecraft } from './Minecraft/Bot';
 import { DiscordClient } from './Utils/DiscordClient';
 
 const { Guilds, GuildMessages, GuildMembers, MessageContent } = GatewayIntentBits;
@@ -26,6 +26,6 @@ client.webhook.options.allowedMentions = { parse: [] };
 loadEvents(client);
 
 //Begin MC Client
-HandleMinecraft(client);
+handleMinecraft(client);
 
 client.login(client.config.token);

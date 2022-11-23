@@ -1,9 +1,9 @@
 import { createClient } from '../Utils/MinecraftClient';
 import { DiscordClient } from '../Utils/DiscordClient';
-import { HandleChat } from './Chat';
+import { handleChat } from './Chat';
 import { PlayerManager } from './PlayerManager';
 
-export function HandleMinecraft(client: DiscordClient) {
+export function handleMinecraft(client: DiscordClient) {
     if (!client.config['in-game-bot'].enabled) return; // Returns if there is no bot config
     client.bot = createClient({
         host: client.config.ips.n00b,
@@ -18,12 +18,12 @@ export function HandleMinecraft(client: DiscordClient) {
 
     client.bot.on('disconnect', (packet) => {
         console.log('Disconnected from server : ' + packet.reason);
-        ReconnectToServer(client);
+        reconnectToServer(client);
     }); // Sends log message when the bot disconnects from the server and reconnects it
 
     client.bot.on('end', () => {
         console.log('Connection lost');
-        ReconnectToServer(client);
+        reconnectToServer(client);
     }); // Sends log message when the bot loses connection to the server and reconnects it
 
     client.bot.on('error', (err) => {
@@ -34,12 +34,12 @@ export function HandleMinecraft(client: DiscordClient) {
 
     client.bot.on('connect', () => {
         console.log(`Connected to Server...`);
-        HandleChat(client);
+        handleChat(client);
     }); // Sends log message when the bot connects to the server
 }
 
 // Waits 3 seconds and tries to reconnect to the server
-function ReconnectToServer(client: DiscordClient) {
+function reconnectToServer(client: DiscordClient) {
     console.log('Reconnecting in 3 seconds...');
     setTimeout(() => {
         console.log('Attempting to connect...');
