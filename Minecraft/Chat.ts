@@ -1,5 +1,5 @@
 import { DiscordClient } from '../Utils/DiscordClient';
-import { PlayerAPI } from './PlayerAPI';
+import { PlayerManager } from './PlayerManager';
 
 export function HandleChat(client: DiscordClient) {
     const { bot } = client;
@@ -11,17 +11,17 @@ export function HandleChat(client: DiscordClient) {
             ? (name = name)
             : (name = JSON.parse(data.networkName)?.extra[2]?.text);
         if (name === bot.username) return; // Ignore messages from the bot
+        if(name.startsWith('N00bBot')) return;
         if (
             client.config['in-game-bot'].muted.find(
                 (entry) => entry.name === name
             )
         )
             return; // Ignore messages from muted players
-
-        const player = new PlayerAPI(data.senderUuid);
+        const player = bot.playerManager.getPlayerByUUID(data.senderUuid);
         client.sendWebHookMessage(
             data.plainMessage,
-            player.getHeadPictureURL(),
+            player?.getHeadURL() || client.config.constants.defaultProfile,
             name
         ); // Send the message to discord
     });
@@ -33,7 +33,8 @@ export function HandleChat(client: DiscordClient) {
         const username = raw?.with ? raw?.with[0]?.insertion : undefined;
         const hoverEvent = raw?.with ? raw?.with[0]?.hoverEvent : undefined;
         const { id } = hoverEvent?.contents || {};
-        const player = new PlayerAPI(id);
+        const player = bot.playerManager.getPlayerByUUID(id);
+        if(username === client.bot.username) return;
 
         switch (
             translate // Checks what type of system message it is
@@ -41,11 +42,12 @@ export function HandleChat(client: DiscordClient) {
             case 'multiplayer.player.joined':
                 if (color !== 'yellow' || !translate || !username || !id)
                     return;
+                
                 client.sendEmbedMessage(
                     client.config.guild.channels.chat_relay,
                     username,
                     `${username} has joined the game.`,
-                    player.getHeadPictureURL(),
+                    player?.getHeadURL() || client.config.constants.defaultProfile,
                     '#00ff00'
                 );
                 break;
@@ -55,7 +57,7 @@ export function HandleChat(client: DiscordClient) {
                     client.config.guild.channels.chat_relay,
                     raw?.with[0]?.text,
                     `${raw?.with[0]?.text} has left the game.`,
-                    player.getHeadPictureURLByName(raw?.with[0]?.text),
+                    player?.getHeadURL() || client.config.constants.defaultProfile,
                     '#9d3838'
                 );
                 break;
@@ -65,7 +67,7 @@ export function HandleChat(client: DiscordClient) {
                     client.config.guild.channels.chat_relay,
                     `Sleeper count has changed!`,
                     `There are now ${raw.with.join('/')} players sleeping.`,
-                    'https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj',
+                    player?.getHeadURL() || client.config.constants.defaultProfile,
                     '#c2c5cc'
                 );
                 break;

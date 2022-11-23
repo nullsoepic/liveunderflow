@@ -16,7 +16,7 @@ export class PlayerManager {
             const { data } = packet;
             switch (packet.action) {
                 case 0:
-                    const player = new Player(data[0]?.name, data[0]?.uuid);
+                    const player = new Player(data[0]?.name, data[0]?.UUID);
                     this.players.set(data[0]?.UUID, player);
                     player.downloadImage();
                     break;
@@ -35,5 +35,13 @@ export class PlayerManager {
     // Returns an Array of online players
     getPlayerArray() {
         return Array.from(this.getPlayers().values());
+    }
+
+    getPlayerByName(name: string) {
+        return this.getPlayerArray().find((player) => player.name === name);
+    }
+
+    getPlayerByUUID(uuid: string) {
+        return this.getPlayerArray().find((player) => player.uuid === uuid);
     }
 }
