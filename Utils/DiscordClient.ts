@@ -11,7 +11,7 @@ export class DiscordClient extends Client {
     bot: MinecraftClient;
     webhook: WebhookClient;
 
-    sendWebHookMessage(message: string, picture: string = "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj", username?: string) {
+    sendWebHookMessage(message: string, picture: string = this.config.constants.defaultProfile, username?: string) {
         this.webhook.send({
             content: message,
             avatarURL: picture,
@@ -21,7 +21,7 @@ export class DiscordClient extends Client {
     }
 
     sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
-        picture = picture || "https://yt3.ggpht.com/ytc/AMLnZu8gDqmPezdXMDI1k183oQeknA_V4ZDb6FQPo39PVg=s88-c-k-c0x00ffffff-no-rj"
+        picture = picture || this.config.constants.defaultProfile
 
         const channel = this.getTextChannel(location)
         const embed = new EmbedBuilder({
@@ -45,11 +45,12 @@ export class DiscordClient extends Client {
 }
 
 type Command = {
-    developer?: boolean,
-    data: SlashCommandBuilder
-    execute: (...args) => Function
+    developer?: boolean;
+    data: SlashCommandBuilder;
+    execute: (...args) => Function;
 }
 
 type Event = {
-
+    name: string;
+    execute: (interaction: any, client: DiscordClient) => Function;
 }
