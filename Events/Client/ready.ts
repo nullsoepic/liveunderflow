@@ -6,7 +6,7 @@ import { DiscordClient } from '../../Utils/DiscordClient';
 export const name = "ready";
 export const once = true;
 export async function execute(client: DiscordClient) {
-    async function checksrv() {
+    async function checkSRV() {
         try {
             const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
             const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
@@ -34,11 +34,11 @@ export async function execute(client: DiscordClient) {
     }
 
     loadCommands(client);
-    checksrv()
+    checkSRV()
     console.log(` ⚪ - ${client.user?.tag} ready!`);
     client.user?.setActivity('the Server', { type: ActivityType.Watching });
 
     setInterval(async () => {
-        await checksrv()
+        await checkSRV()
     }, client.config.autodata.delay * 1000)
 }
