@@ -36,7 +36,7 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         return true;
     }
 
-    member.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
+    member.roles.add(interaction.guild?.roles.cache.find(r => r.id === client.config.guild.roles.rw))
     embed.setTitle(`Thanks for vouching!`);
     embed.setDescription(`The member has recieved their role!`);
     embed.setColor(`Green`);
