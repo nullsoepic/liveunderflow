@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, GuildMemberRoleManager } from 'discord.js';
 import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
@@ -10,7 +10,8 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const embed = new EmbedBuilder()
     
-    if(!interaction.guild?.roles.cache.some(r => r.id === client.config.guild.roles.rw)) {
+    //@ts-ignore
+    if(!(interaction.member.roles as GuildMemberRoleManager).cache.has(r => r.id === client.config.guild.roles.rw)) {
         embed.setTitle(`You can't vouch.`);
         embed.setDescription(`Only users who have the \`rw\` role can vouch for others!`);
         embed.setColor(`Red`);
