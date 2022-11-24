@@ -16,7 +16,7 @@ export class DiscordClient extends Client {
             content: message,
             avatarURL: picture,
             username: username,
-            allowedMentions: { parse: [] }
+            allowedMentions: { parse: [ "users" ], users: [] }
         })
     }
 

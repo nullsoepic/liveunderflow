@@ -44,5 +44,5 @@ function reconnectToServer(client: DiscordClient) {
     setTimeout(() => {
         console.log('Attempting to connect...');
         client.bot = createClient(client.bot.options);
-    }, 1000 * 3);
+    }, 1000 * 60);
 }

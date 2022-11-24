@@ -1,5 +1,4 @@
 import { DiscordClient } from '../Utils/DiscordClient';
-import { PlayerManager } from './PlayerManager';
 
 export function handleChat(client: DiscordClient) {
     const { bot } = client;
@@ -44,7 +43,7 @@ export function handleChat(client: DiscordClient) {
                     return;
                 
                 client.sendEmbedMessage(
-                    client.config.guild.channels.chat_relay,
+                    client.config.guild.channels.relay_channel,
                     username,
                     `${username} has joined the game.`,
                     player?.getHeadURL() || client.config.constants.defaultProfile,
@@ -54,7 +53,7 @@ export function handleChat(client: DiscordClient) {
             case 'multiplayer.player.left':
                 if (color !== 'yellow' || !translate || !raw.with) return;
                 client.sendEmbedMessage(
-                    client.config.guild.channels.chat_relay,
+                    client.config.guild.channels.relay_channel,
                     raw?.with[0]?.text,
                     `${raw?.with[0]?.text} has left the game.`,
                     player?.getHeadURL() || client.config.constants.defaultProfile,
@@ -64,7 +63,7 @@ export function handleChat(client: DiscordClient) {
             case 'sleep.players_sleeping':
                 if (!translate || !raw.with) return;
                 client.sendEmbedMessage(
-                    client.config.guild.channels.chat_relay,
+                    client.config.guild.channels.relay_channel,
                     `Sleeper count has changed!`,
                     `There are now ${raw.with.join('/')} players sleeping.`,
                     player?.getHeadURL() || client.config.constants.defaultProfile,
@@ -77,10 +76,10 @@ export function handleChat(client: DiscordClient) {
     // Detects when a player sends a message in discord channel
     client.on('messageCreate', (message) => {
         if (message.author.bot) return; // Ignore messages from bot
-        if (message.channel.id !== client.config.guild.channels.chat_relay)
+        if (message.channel.id !== client.config.guild.channels.relay_channel)
             // Ignore messages from other channels
             return;
-
+        
         bot.write('chat_message', {
             message: message.author.tag + ' > ' + message.content,
             timestamp: BigInt(Date.now()),

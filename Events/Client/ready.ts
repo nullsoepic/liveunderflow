@@ -9,7 +9,7 @@ export async function execute(client: DiscordClient) {
     async function checkSRV() {
         try {
             const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
-            const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
+            const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.stat_channel);
             const ip = client.config.ips.main;
             const url = `https://api.mcsrvstat.us/2/${ip}`;
     

@@ -9,7 +9,7 @@ const { User, Message, GuildMember, ThreadMember } = Partials;
 const client = new DiscordClient({
     intents: [ Guilds, GuildMessages, GuildMembers, GuildMessages, MessageContent ],
     partials: [User, Message, GuildMember, ThreadMember ],
-    allowedMentions: { parse: [] }
+    allowedMentions: { parse: [ ] }
 });
 
 client.config = require("./config.json");
@@ -20,7 +20,6 @@ client.cooldowns = [];
 client.webhook = new WebhookClient({
     url: client.config['in-game-bot'].webhookURL
 })
-client.webhook.options.allowedMentions = { parse: [] };
 
 // Register Events
 loadEvents(client);

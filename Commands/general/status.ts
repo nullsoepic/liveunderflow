@@ -17,7 +17,7 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
 
     const embed = new EmbedBuilder()
     const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
-    const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
+    const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.stat_channel);
 
     try {
         const ip = client.config.ips.main;

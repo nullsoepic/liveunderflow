@@ -18,7 +18,7 @@ export async function execute(interaction, client: DiscordClient) {
         )
         .setTimestamp()
 
-        const cat = client.channels.cache.find(c => c.id === client.config.guild.channels.appcat) as CategoryChannel
+        const cat = client.channels.cache.find(c => c.id === client.config.guild.channels.app_category) as CategoryChannel
         const chan = await cat?.children?.create({
             name: `${interaction.member.user.tag}`,
             type: ChannelType.GuildText,

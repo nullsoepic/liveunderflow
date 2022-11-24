@@ -6,7 +6,7 @@ const wait = setTimeout;
 export const name = "interactionCreate";
 export async function execute(interaction, client: DiscordClient) {
     if(!interaction.isButton()) return;
-    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
+    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.log_channel)
 
     if(interaction.customId === `apply:close`) {
         if(!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
