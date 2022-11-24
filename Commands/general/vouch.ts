@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, GuildMemberRoleManager } from 'discord.js';
 import { DrippyClient } from '../../Utils/DrippyClient';
 
 export const data = new SlashCommandBuilder()
