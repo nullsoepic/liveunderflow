@@ -67,7 +67,7 @@ async function renderTabImage(players: Player[]) {
     
     const rows = 5;
     const grouping = groupByN(rows, players)
-    const canvas = await read((rows * 180) + (rows * 20), (grouping.length * 180) + grouping.length * 60, '#36393F');
+    const canvas = await read((rows * 180) + (rows * 20), (grouping.length * 180) + grouping.length * 60, '#2C2F33');
     const font = await Jimp.loadFont(resolve('./Minecraft/Font/xsJGJPdTmfYtAZNHX7Kk5tfJ.ttf.fnt'));
     
     for(var i = 0; i < grouping.length; i++) {

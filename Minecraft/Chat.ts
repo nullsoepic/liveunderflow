@@ -10,7 +10,6 @@ export function handleChat(client: DiscordClient) {
             ? (name = name)
             : (name = JSON.parse(data.networkName)?.extra[2]?.text);
         if (name === bot.username) return; // Ignore messages from the bot
-        if(name.startsWith('N00bBot')) return;
         if (
             client.config['in-game-bot'].muted.find(
                 (entry) => entry.name === name
@@ -33,7 +32,14 @@ export function handleChat(client: DiscordClient) {
         const hoverEvent = raw?.with ? raw?.with[0]?.hoverEvent : undefined;
         const { id } = hoverEvent?.contents || {};
         const player = bot.playerManager.getPlayerByUUID(id);
+
         if(username === client.bot.username) return;
+        if (
+            client.config['in-game-bot'].muted.find(
+                (entry) => entry.name === username
+            )
+        )
+            return; // Ignore messages from muted players
 
         switch (
             translate // Checks what type of system message it is
@@ -52,6 +58,8 @@ export function handleChat(client: DiscordClient) {
                 break;
             case 'multiplayer.player.left':
                 if (color !== 'yellow' || !translate || !raw.with) return;
+                if (client.config['in-game-bot'].muted.find((entry) => entry.name === raw?.with[0]?.text)) return;
+
                 client.sendEmbedMessage(
                     client.config.guild.channels.relay_channel,
                     raw?.with[0]?.text,
