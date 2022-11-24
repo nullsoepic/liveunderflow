@@ -10,7 +10,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
     const embed = new EmbedBuilder()
     
-    if(!interaction.guild?.roles.cache.some(r => r.id === client.config.guild.roles.rw)) {
+    if(!interaction.member.roles.cache.has(r => r.id === client.config.guild.roles.rw)) {
         embed.setTitle(`You can't vouch.`);
         embed.setDescription(`Only users who have the \`rw\` role can vouch for others!`);
         embed.setColor(`Red`);
