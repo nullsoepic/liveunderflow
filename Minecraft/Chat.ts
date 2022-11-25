@@ -1,3 +1,4 @@
+import { EmbedBuilder } from 'discord.js';
 import { DiscordClient } from '../Utils/DiscordClient';
 
 export function handleChat(client: DiscordClient) {
@@ -25,7 +26,8 @@ export function handleChat(client: DiscordClient) {
     });
 
     // Detects when there is a system message in minecraft chat
-    bot.on('system_chat', (data) => {
+    //@ts-ignore
+    bot.on('system_chat', async (data) => {
         const raw = JSON.parse(data.content);
         const { color, translate } = raw;
         const username = raw?.with ? raw?.with[0]?.insertion : undefined;
@@ -47,13 +49,38 @@ export function handleChat(client: DiscordClient) {
             case 'multiplayer.player.joined':
                 if (color !== 'yellow' || !translate || !username || !id)
                     return;
-                client.sendEmbedMessage(
+                if(bot.playerManager.joinCache.has(id)) {
+                    const entry = bot.playerManager.joinCache.get(id)
+                    bot.playerManager.joinCache.set(id, {
+                        count: (entry?.count || 1) + 1,
+                        message: entry?.message
+                    })
+                    
+                    const embed = new EmbedBuilder()
+        
+                    embed.setAuthor({
+                        name: entry?.message?.embeds[0].author?.name || 'John Doe',
+                        iconURL: entry?.message?.embeds[0].author?.iconURL
+                    })
+                    embed.setDescription(`${username} has joined the game. (${(entry?.count || 1) + 1})`)
+                    embed.setColor('#00ff00')
+        
+                    return entry?.message?.edit({
+                        embeds: [embed]
+                    })
+                };
+
+                const message = await client.sendEmbedMessage(
                     client.config.guild.channels.relay_channel,
                     username,
                     `${username} has joined the game.`,
                     bot.profileCache.get(id) || client.config.constants.defaultProfile,
                     '#00ff00'
                 );
+                bot.playerManager.joinCache.set(id || '', {
+                    count: 1,
+                    message: message
+                })
                 break;
 
             case 'sleep.players_sleeping':
@@ -76,7 +103,7 @@ export function handleChat(client: DiscordClient) {
         if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) return; // Filter out messages that begin with the defined ignorePrefix.
         
         bot.write('chat_message', {
-            message: message.author.tag + ' > ' + message.content,
+            message: message.author.tag + ': ' + message.content,
             timestamp: BigInt(Date.now()),
             salt: 0,
             signature: Buffer.alloc(0),

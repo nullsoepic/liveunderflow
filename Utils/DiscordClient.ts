@@ -20,7 +20,7 @@ export class DiscordClient extends Client {
         })
     }
 
-    sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
+    async sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
         //picture = picture || this.config.constants.defaultProfile
 
         const channel = this.getTextChannel(location)
@@ -33,7 +33,7 @@ export class DiscordClient extends Client {
         embed.setDescription(description)
         embed.setColor(color)
         
-        channel.send({
+        return await channel.send({
             embeds: [ embed ]
         })
     }
