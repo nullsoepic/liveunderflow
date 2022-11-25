@@ -40,7 +40,7 @@ export function handleMinecraft(client: DiscordClient) {
     }); // Sends log message when the bot connects to the server
 }
 
-// Waits 3 seconds and tries to reconnect to the server
+// Waits a minute and tries to reconnect to the server
 function reconnectToServer(client: DiscordClient) {
     console.log('Reconnecting in 60 seconds...');
     setTimeout(() => {
