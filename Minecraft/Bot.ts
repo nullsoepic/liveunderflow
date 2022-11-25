@@ -45,6 +45,6 @@ function reconnectToServer(client: DiscordClient) {
     console.log('Reconnecting in 60 seconds...');
     setTimeout(() => {
         console.log('Attempting to connect...');
-        client.bot = createClient(client.bot.options);
+        handleMinecraft(client);
     }, 1000 * 60);
 }
