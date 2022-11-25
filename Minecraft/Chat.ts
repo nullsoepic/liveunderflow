@@ -13,7 +13,7 @@ export function handleChat(client: DiscordClient) {
         if (name === bot.username) return; // Ignore messages from the bot
         if (
             client.config['in-game-bot'].muted.find(
-                (entry) => entry.name === name
+                (entry) => entry.name === name && !entry.chat
             )
         )
             return; // Ignore messages from muted players
@@ -38,7 +38,7 @@ export function handleChat(client: DiscordClient) {
         if(username === client.bot.username) return;
         if (
             client.config['in-game-bot'].muted.find(
-                (entry) => entry.name === username
+                (entry) => entry.name === username && !entry.joinLeaveLog
             )
         )
             return; // Ignore messages from muted players
@@ -103,7 +103,7 @@ export function handleChat(client: DiscordClient) {
         if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) return; // Filter out messages that begin with the defined ignorePrefix.
         
         bot.write('chat_message', {
-            message: message.author.tag + ': ' + message.content,
+            message: client.config['in-game-bot'].chatCommands.includes(message.content) ? message.content : (message.author.tag + ': ' + message.content),
             timestamp: BigInt(Date.now()),
             salt: 0,
             signature: Buffer.alloc(0),
