@@ -26,6 +26,7 @@
         "logLeaves": true,
         "logChat": true,
         "webhookURL": "discord-webhook-URL",
+        "ignorePrefix": "Stops any messages from discord's side going to Minecraft if the message starts with this.",
         "muted": [
             {
                 "name": "grief_ing",

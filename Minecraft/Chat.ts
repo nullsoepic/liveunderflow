@@ -55,7 +55,7 @@ export function handleChat(client: DiscordClient) {
                     '#00ff00'
                 );
                 break;
-                
+
             case 'sleep.players_sleeping':
                 if (!translate || !raw.with) return;
                 client.sendEmbedMessage(
@@ -72,9 +72,8 @@ export function handleChat(client: DiscordClient) {
     // Detects when a player sends a message in discord channel
     client.on('messageCreate', (message) => {
         if (message.author.bot) return; // Ignore messages from bot
-        if (message.channel.id !== client.config.guild.channels.relay_channel)
-            // Ignore messages from other channels
-            return;
+        if (message.channel.id !== client.config.guild.channels.relay_channel) return; // Ignore messages from other channels
+        if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) return; // Filter out messages that begin with the defined ignorePrefix.
         
         bot.write('chat_message', {
             message: message.author.tag + ' > ' + message.content,

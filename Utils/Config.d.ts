@@ -26,6 +26,7 @@ export type Config = {
         logLeaves: boolean,
         logChat: boolean,
         webhookURL: string,
+        ignorePrefix: string,
         muted: Muted[]
     },
     constants: {
