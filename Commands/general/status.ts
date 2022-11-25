@@ -76,6 +76,7 @@ async function renderTabImage(players: Player[]) {
             const player = group[l];
 
             const image = await player.downloadImage();
+            
             if(!image) continue;
             const mathX = (l * 180) + (l * 20) + 10;
             const mathY = (i * 180) + (i * 60) + 30;

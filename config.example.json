@@ -12,7 +12,8 @@
             "log_channel": "log-channel-id",
             "app_category": "application-category-id",
             "stat_channel": "status-voice-channel-id",
-            "relay_channel": "chat-relay-channel-id"
+            "relay_channel": "chat-relay-channel-id",
+            "cache_channel": "cache-channel-id"
         },
         "roles": {
             "rwx": "moderator-role-id",

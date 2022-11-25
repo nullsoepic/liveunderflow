@@ -2,6 +2,7 @@ import { createClient } from '../Utils/MinecraftClient';
 import { DiscordClient } from '../Utils/DiscordClient';
 import { handleChat } from './Chat';
 import { PlayerManager } from './PlayerManager';
+import { ProfileCache } from './ProfileCache';
 
 export function handleMinecraft(client: DiscordClient) {
     if (!client.config['in-game-bot'].enabled) return; // Returns if there is no bot config
@@ -14,7 +15,8 @@ export function handleMinecraft(client: DiscordClient) {
         disableChatSigning: true
     }); // Creates the bot
 
-    client.bot.playerManager = new PlayerManager(client.bot);
+    client.bot.profileCache = new ProfileCache(client);
+    client.bot.playerManager = new PlayerManager(client);
 
     client.bot.on('disconnect', (packet) => {
         console.log('Disconnected from server : ' + packet.reason);

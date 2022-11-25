@@ -12,7 +12,8 @@ export type Config = {
             log_channel: string,
             app_category: string,
             stat_channel: string,
-            relay_channel: string
+            relay_channel: string,
+            cache_channel: string
         },
         roles: {
             rwx: string,

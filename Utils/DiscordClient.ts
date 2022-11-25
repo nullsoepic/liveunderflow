@@ -1,4 +1,4 @@
-import { Client, Collection, ColorResolvable, EmbedBuilder, SlashCommandBuilder, TextChannel, WebhookClient } from "discord.js";
+import { AttachmentBuilder, Client, Collection, ColorResolvable, EmbedBuilder, SlashCommandBuilder, TextChannel, WebhookClient } from "discord.js";
 import { Config } from "./Config";
 import { MinecraftClient } from "./MinecraftClient";
 
@@ -37,6 +37,14 @@ export class DiscordClient extends Client {
         channel.send({
             embeds: [ embed ]
         })
+    }
+
+    async sendAttachments(location: string, attachments: AttachmentBuilder[]) {
+        const channel = this.getTextChannel(location);
+        const message = await channel.send({
+          files: attachments
+        })
+        return Array.from(message.attachments.values())
     }
 
     getTextChannel(id: string) {

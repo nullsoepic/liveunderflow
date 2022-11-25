@@ -1,9 +1,11 @@
 import { Client, ClientOptions } from 'minecraft-protocol';
 import { PlayerManager } from '../Minecraft/PlayerManager';
 import * as mc from 'minecraft-protocol';
+import { ProfileCache } from '../Minecraft/ProfileCache';
 
 export class MinecraftClient extends Client {
     playerManager: PlayerManager;
+    profileCache: ProfileCache;
     options: ClientOptions;
 }
 
