@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, GuildMemberRoleManager } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
     .setName('vouch')
@@ -7,7 +7,7 @@ export const data = new SlashCommandBuilder()
     .addUserOption((o) => o.setName(`user`).setDescription(`Who do you want to vouch for?`).setRequired(true))
 
 
-export async function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const embed = new EmbedBuilder()
     
     //@ts-ignore
@@ -36,12 +36,12 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         return true;
     }
 
-    member.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
+    member.roles.add(interaction.guild?.roles.cache.find(r => r.id === client.config.guild.roles.rw))
     embed.setTitle(`Thanks for vouching!`);
     embed.setDescription(`The member has recieved their role!`);
     embed.setColor(`Green`);
 
-    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.logchan)
+    const chan = client.channels.cache.find(c => c.id === client.config.guild.channels.log_channel)
     //@ts-ignore
     chan?.send({
         //@ts-ignore

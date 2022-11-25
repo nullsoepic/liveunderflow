@@ -1,12 +1,12 @@
 import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, User } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
     .setName('check')
     .setDescription('Do you have the right ip? Check with this command')
     .addStringOption((o) => o.setName(`ip`).setDescription(`Put the ip here (no port needed!)`).setRequired(true))
 
-export function execute(interaction: ChatInputCommandInteraction, client: DrippyClient) {
+export function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
     const user = interaction.member?.user
     if(!(user instanceof User)) return;
 

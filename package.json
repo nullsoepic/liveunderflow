@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "VibingDev",
-  "license": "ISC",
+  "license": "CC BY-SA 4.0",
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
     "ascii-table": "^0.0.9",
@@ -17,7 +17,9 @@
     "discord-music-player": "^9.1.1",
     "discord.js": "^14.3.0",
     "glob": "^8.0.3",
-    "isomorphic-unfetch": "^3.1.0"
+    "isomorphic-unfetch": "^3.1.0",
+    "jimp": "^0.16.2",
+    "minecraft-protocol": "github:jtsiskin/node-minecraft-protocol#47cb103"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"

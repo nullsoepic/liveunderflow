@@ -1,9 +1,9 @@
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChannelType, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, CategoryChannel } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const name = "interactionCreate";
-export async function execute(interaction, client: DrippyClient) {
+export async function execute(interaction, client: DiscordClient) {
     if(!interaction.isModalSubmit()) return;
 
     if(interaction.customId === `application`) {
@@ -18,7 +18,7 @@ export async function execute(interaction, client: DrippyClient) {
         )
         .setTimestamp()
 
-        const cat = client.channels.cache.find(c => c.id === client.config.guild.channels.appcat) as CategoryChannel
+        const cat = client.channels.cache.find(c => c.id === client.config.guild.channels.app_category) as CategoryChannel
         const chan = await cat?.children?.create({
             name: `${interaction.member.user.tag}`,
             type: ChannelType.GuildText,

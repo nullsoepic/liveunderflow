@@ -1,15 +1,15 @@
 import { loadCommands } from '../../Handlers/commandHandler';
 import axios from 'axios';
 import { ActivityType } from 'discord.js';
-import { DrippyClient } from '../../Utils/DrippyClient';
+import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const name = "ready";
 export const once = true;
-export async function execute(client: DrippyClient) {
-    async function checksrv() {
+export async function execute(client: DiscordClient) {
+    async function checkSRV() {
         try {
             const guild = await client.guilds.cache.find(g => g.id === client.config.guild.id)
-            const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.statchan);
+            const channel = await guild?.channels.cache.find(c => c.id === client.config.guild.channels.stat_channel);
             const ip = client.config.ips.main;
             const url = `https://api.mcsrvstat.us/2/${ip}`;
     
@@ -34,11 +34,11 @@ export async function execute(client: DrippyClient) {
     }
 
     loadCommands(client);
-    checksrv()
+    checkSRV()
     console.log(` ⚪ - ${client.user?.tag} ready!`);
     client.user?.setActivity('the Server', { type: ActivityType.Watching });
 
     setInterval(async () => {
-        await checksrv()
+        await checkSRV()
     }, client.config.autodata.delay * 1000)
 }

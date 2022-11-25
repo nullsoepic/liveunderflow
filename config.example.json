@@ -9,14 +9,200 @@
     "guild": {
         "id": "guild-id",
         "channels": {
-            "logchan": "log-channel-id",
-            "appcat": "application-category-id",
-            "statchan": "status-voice-channel-id"
+            "log_channel": "log-channel-id",
+            "app_category": "application-category-id",
+            "stat_channel": "status-voice-channel-id",
+            "relay_channel": "chat-relay-channel-id",
+            "cache_channel": "cache-channel-id"
         },
         "roles": {
             "rwx": "moderator-role-id",
             "rw": "solutions-role-id"
         }
+    },
+    "in-game-bot": {
+        "enabled": true,
+        "logJoins": true,
+        "logLeaves": true,
+        "logChat": true,
+        "webhookURL": "discord-webhook-URL",
+        "muted": [
+            {
+                "name": "grief_ing",
+                "reason": "some f'ing bot spamming random lines in chat."
+            },
+            {
+                "name": "N00bBot",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot0",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot1",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot2",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot3",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot4",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot5",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot6",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot7",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot8",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot9",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot10",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot11",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot12",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot42",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot64",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot69",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot73",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot80",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot100",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot101",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot102",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot103",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot203",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot226",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot305",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot401",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot403",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot404",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot407",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot418",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot420",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot429",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot443",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot501",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot511",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot666",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot1337",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot6174",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot9001",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot25565",
+                "reason": "Part of the N00bBot proxy."
+            },
+            {
+                "name": "N00bBot314159265",
+                "reason": "Part of the N00bBot proxy."
+            }
+        ]
+    },
+    "constants": {
+        "defaultProfile": "https://raw.githubusercontent.com/nullsoepic/liveunderflow/main/Media/Logo.jpg"
     },
     "autodata": {
         "delay": 30

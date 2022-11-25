@@ -9,14 +9,27 @@ export type Config = {
     guild: {
         id: string,
         channels: {
-            logchan: string,
-            appcat: string,
-            statchan: string,
+            log_channel: string,
+            app_category: string,
+            stat_channel: string,
+            relay_channel: string,
+            cache_channel: string
         },
         roles: {
             rwx: string,
             rw: string
         }
+    },
+    "in-game-bot": {
+        enabled: boolean,
+        logJoins: boolean,
+        logLeaves: boolean,
+        logChat: boolean,
+        webhookURL: string,
+        muted: Muted[]
+    },
+    constants: {
+        defaultProfile: string
     },
     autodata: {
         delay: number
@@ -26,4 +39,9 @@ export type Config = {
         time: number
     },
     filter: string[]
+}
+
+interface Muted {
+    name: string;
+    reason: string;
 }
