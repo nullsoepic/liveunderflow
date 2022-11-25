@@ -47,27 +47,15 @@ export function handleChat(client: DiscordClient) {
             case 'multiplayer.player.joined':
                 if (color !== 'yellow' || !translate || !username || !id)
                     return;
-                
                 client.sendEmbedMessage(
                     client.config.guild.channels.relay_channel,
                     username,
                     `${username} has joined the game.`,
-                    player?.getHeadURL() || client.config.constants.defaultProfile,
+                    bot.profileCache.get(id) || client.config.constants.defaultProfile,
                     '#00ff00'
                 );
                 break;
-            case 'multiplayer.player.left':
-                if (color !== 'yellow' || !translate || !raw.with) return;
-                if (client.config['in-game-bot'].muted.find((entry) => entry.name === raw?.with[0]?.text)) return;
-
-                client.sendEmbedMessage(
-                    client.config.guild.channels.relay_channel,
-                    raw?.with[0]?.text,
-                    `${raw?.with[0]?.text} has left the game.`,
-                    player?.getHeadURL() || client.config.constants.defaultProfile,
-                    '#9d3838'
-                );
-                break;
+                
             case 'sleep.players_sleeping':
                 if (!translate || !raw.with) return;
                 client.sendEmbedMessage(

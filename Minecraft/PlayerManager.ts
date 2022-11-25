@@ -23,7 +23,7 @@ export class PlayerManager {
                     this.loadPicture(player);
                     break;
                 case 4:
-                    this.players.delete(data[0]?.UUID);
+                    this.logLeave(this.getPlayerByUUID(data[0]?.UUID))
                     break;
             }
         });
@@ -36,6 +36,19 @@ export class PlayerManager {
         const image = await player.downloadImage();
         const attachments = await uploadImage(image, this.client);
         return this.bot.profileCache.set(player.uuid, attachments[0].url);
+    }
+
+    logLeave(player: Player | undefined) {
+        if (this.client.config['in-game-bot'].muted.find((entry) => entry.name === player?.name)) return;
+        
+        this.client.sendEmbedMessage(
+            this.client.config.guild.channels.relay_channel,
+            player?.name || 'John Doe',
+            `${player?.name} has left the game.`,
+            player?.getHeadURL() || this.client.config.constants.defaultProfile,
+            '#9d3838'
+        );
+        this.players.delete(player?.uuid || '');
     }
 
     // Returns a Map of online players
