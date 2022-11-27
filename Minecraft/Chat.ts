@@ -87,6 +87,12 @@ export function handleChat(client: DiscordClient) {
         if (message.channel.id !== client.config.guild.channels.relay_channel)
             // Ignore messages from other channels
             return;
+        if (message.content.length > 255) {
+            // Ignore messages longer than the MC chat limit | Temporary
+            // TODO: Split long messages into multiple and send with delay!
+            message.react('❌')
+            return;
+        }
         
         bot.write('chat_message', {
             message: message.author.tag + ' > ' + message.content,
