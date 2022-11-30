@@ -38,11 +38,6 @@ export async function execute(interaction, client: DiscordClient) {
 
     if(interaction.customId === `apply:approve`) {
         if(!interaction.member.roles.cache.find(r => r.id === client.config.guild.roles.rw)) {
-            await wait(3000)
-            interaction.channel.delete()
-            if(chan instanceof TextChannel) chan?.send({
-                embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} deleted channel: ${interaction.channel.name}**`)]
-            })
 
             return interaction.reply({
                 content: `You are not allowed to approve users for the RW role`,
@@ -55,6 +50,10 @@ export async function execute(interaction, client: DiscordClient) {
         interaction.reply({
             content: `**🥳 Congrats <@${usr.user.id}>! You have been approved for the \`rw\` role!**`
         })
+        
+        if(chan instanceof TextChannel) chan?.send({
+            embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} approved: ${interaction.channel.name}**`)]
+        })
     }
 
     if(interaction.customId === `apply:close:confirm`) {
@@ -63,6 +62,10 @@ export async function execute(interaction, client: DiscordClient) {
         })
         await wait(3000)
         interaction.channel.delete()
+        
+        if(chan instanceof TextChannel) chan?.send({
+            embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} deleted channel: ${interaction.channel.name}**`)]
+        })
     }
 
     if(interaction.customId !== `apply:close:cancel`) return;
