@@ -98,9 +98,24 @@ export function handleChat(client: DiscordClient) {
 
     // Detects when a player sends a message in discord channel
     client.on('messageCreate', (message) => {
-        if (message.author.bot) return; // Ignore messages from bot
-        if (message.channel.id !== client.config.guild.channels.relay_channel) return; // Ignore messages from other channels
-        if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) return; // Filter out messages that begin with the defined ignorePrefix.
+        if (message.author.bot) 
+            // Ignore messages from bot
+            return;
+            
+        if (message.channel.id !== client.config.guild.channels.relay_channel)
+            // Ignore messages from other channels
+            return;
+            
+        if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) 
+            // Filter out messages that begin with the defined ignorePrefix.
+            return;
+            
+        if (message.content.length > 255) {
+            // Ignore messages longer than the MC chat limit | Temporary
+            // TODO: Split long messages into multiple and send with delay!
+            message.react('❌')
+            return;
+        }
         
         bot.write('chat_message', {
             message: client.config['in-game-bot'].chatCommands.includes(message.content) ? message.content : (message.author.tag + ': ' + message.content),
