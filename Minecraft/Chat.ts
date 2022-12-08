@@ -1,3 +1,4 @@
+import { EmbedBuilder } from 'discord.js';
 import { DiscordClient } from '../Utils/DiscordClient';
 
 export function handleChat(client: DiscordClient) {
@@ -12,7 +13,7 @@ export function handleChat(client: DiscordClient) {
         if (name === bot.username) return; // Ignore messages from the bot
         if (
             client.config['in-game-bot'].muted.find(
-                (entry) => entry.name === name
+                (entry) => entry.name === name && !entry.chat
             )
         )
             return; // Ignore messages from muted players
@@ -25,7 +26,8 @@ export function handleChat(client: DiscordClient) {
     });
 
     // Detects when there is a system message in minecraft chat
-    bot.on('system_chat', (data) => {
+    //@ts-ignore
+    bot.on('system_chat', async (data) => {
         const raw = JSON.parse(data.content);
         const { color, translate } = raw;
         const username = raw?.with ? raw?.with[0]?.insertion : undefined;
@@ -36,7 +38,7 @@ export function handleChat(client: DiscordClient) {
         if(username === client.bot.username) return;
         if (
             client.config['in-game-bot'].muted.find(
-                (entry) => entry.name === username
+                (entry) => entry.name === username && !entry.joinLeaveLog
             )
         )
             return; // Ignore messages from muted players
@@ -47,27 +49,40 @@ export function handleChat(client: DiscordClient) {
             case 'multiplayer.player.joined':
                 if (color !== 'yellow' || !translate || !username || !id)
                     return;
-                
-                client.sendEmbedMessage(
+                if(bot.playerManager.joinCache.has(id)) {
+                    const entry = bot.playerManager.joinCache.get(id)
+                    bot.playerManager.joinCache.set(id, {
+                        count: (entry?.count || 1) + 1,
+                        message: entry?.message
+                    })
+                    
+                    const embed = new EmbedBuilder()
+        
+                    embed.setAuthor({
+                        name: entry?.message?.embeds[0].author?.name || 'John Doe',
+                        iconURL: entry?.message?.embeds[0].author?.iconURL
+                    })
+                    embed.setDescription(`${username} has joined the game. (${(entry?.count || 1) + 1})`)
+                    embed.setColor('#00ff00')
+        
+                    return entry?.message?.edit({
+                        embeds: [embed]
+                    })
+                };
+
+                const message = await client.sendEmbedMessage(
                     client.config.guild.channels.relay_channel,
                     username,
                     `${username} has joined the game.`,
-                    player?.getHeadURL() || client.config.constants.defaultProfile,
+                    bot.profileCache.get(id) || client.config.constants.defaultProfile,
                     '#00ff00'
                 );
+                bot.playerManager.joinCache.set(id || '', {
+                    count: 1,
+                    message: message
+                })
                 break;
-            case 'multiplayer.player.left':
-                if (color !== 'yellow' || !translate || !raw.with) return;
-                if (client.config['in-game-bot'].muted.find((entry) => entry.name === raw?.with[0]?.text)) return;
 
-                client.sendEmbedMessage(
-                    client.config.guild.channels.relay_channel,
-                    raw?.with[0]?.text,
-                    `${raw?.with[0]?.text} has left the game.`,
-                    player?.getHeadURL() || client.config.constants.defaultProfile,
-                    '#9d3838'
-                );
-                break;
             case 'sleep.players_sleeping':
                 if (!translate || !raw.with) return;
                 client.sendEmbedMessage(
@@ -83,10 +98,18 @@ export function handleChat(client: DiscordClient) {
 
     // Detects when a player sends a message in discord channel
     client.on('messageCreate', (message) => {
-        if (message.author.bot) return; // Ignore messages from bot
+        if (message.author.bot) 
+            // Ignore messages from bot
+            return;
+            
         if (message.channel.id !== client.config.guild.channels.relay_channel)
             // Ignore messages from other channels
             return;
+            
+        if (message.content.startsWith(client.config['in-game-bot'].ignorePrefix)) 
+            // Filter out messages that begin with the defined ignorePrefix.
+            return;
+            
         if (message.content.length > 255) {
             // Ignore messages longer than the MC chat limit | Temporary
             // TODO: Split long messages into multiple and send with delay!
@@ -95,7 +118,7 @@ export function handleChat(client: DiscordClient) {
         }
         
         bot.write('chat_message', {
-            message: message.author.tag + ' > ' + message.content,
+            message: client.config['in-game-bot'].chatCommands.includes(message.content) ? message.content : (message.author.tag + ': ' + message.content),
             timestamp: BigInt(Date.now()),
             salt: 0,
             signature: Buffer.alloc(0),

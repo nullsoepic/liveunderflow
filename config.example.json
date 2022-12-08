@@ -26,177 +26,265 @@
         "logLeaves": true,
         "logChat": true,
         "webhookURL": "discord-webhook-URL",
+        "ignorePrefix": "Stops any messages from discord's side going to Minecraft if the message starts with this.",
+        "chatCommands": ["!help", "!about", "!uptime", "!fuckphantoms", "!sleep", "!seed", "!online", "!tps", "!time", "!ping", "!magic8ball", "!amisus", "!ncr", "!random", "!owner", "!dropall", "!selectitem", "!troll", "!cansee", "!near"],
         "muted": [
             {
                 "name": "grief_ing",
+                "chat": false,
+                "joinLeaveLog": true,
                 "reason": "some f'ing bot spamming random lines in chat."
             },
             {
                 "name": "N00bBot",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot0",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot1",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot2",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot3",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot4",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot5",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot6",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot7",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot8",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot9",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot10",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot11",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot12",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot42",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot64",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot69",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot73",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot80",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot100",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot101",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot102",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot103",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot203",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot226",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot305",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot401",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot403",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot404",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot407",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot418",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot420",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot429",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot443",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot501",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot511",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot666",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot1337",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot6174",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot9001",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot25565",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             },
             {
                 "name": "N00bBot314159265",
+                "chat": true,
+                "joinLeaveLog": false,
                 "reason": "Part of the N00bBot proxy."
             }
         ]

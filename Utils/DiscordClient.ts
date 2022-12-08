@@ -20,21 +20,20 @@ export class DiscordClient extends Client {
         })
     }
 
-    sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
-        picture = picture || this.config.constants.defaultProfile
+    async sendEmbedMessage(location: string, title: string, description: string, picture: string, color: ColorResolvable) {
+        //picture = picture || this.config.constants.defaultProfile
 
         const channel = this.getTextChannel(location)
-        const embed = new EmbedBuilder({
-            author: {
-                name: title,
-                icon_url: picture
-            },
-            description: description,
-        })
+        const embed = new EmbedBuilder()
 
+        embed.setAuthor({
+            name: title,
+            iconURL: picture
+        })
+        embed.setDescription(description)
         embed.setColor(color)
         
-        channel.send({
+        return await channel.send({
             embeds: [ embed ]
         })
     }

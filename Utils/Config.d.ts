@@ -26,6 +26,8 @@ export type Config = {
         logLeaves: boolean,
         logChat: boolean,
         webhookURL: string,
+        ignorePrefix: string,
+        chatCommands: string[],
         muted: Muted[]
     },
     constants: {
@@ -43,5 +45,7 @@ export type Config = {
 
 interface Muted {
     name: string;
+    chat: boolean;
+    joinLeaveLog: boolean;
     reason: string;
 }
