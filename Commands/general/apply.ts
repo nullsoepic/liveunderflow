@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, TextChannel } from "discord.js";
 import { DiscordClient } from "../../Utils/DiscordClient";
 
 export const data = new SlashCommandBuilder()
@@ -6,6 +6,12 @@ export const data = new SlashCommandBuilder()
     .setDescription('Apply for the rw role!')
 
 export async function execute(interaction: ChatInputCommandInteraction, client: DiscordClient) {
+    const channel = client.channels.cache.find((channel: any) => channel.topic === interaction.member?.user.id) as TextChannel;
+    if(channel) return interaction.reply({
+        content: "You have already made a ticket, you cannot make another one.",
+        ephemeral: true
+    })
+
     const modal = new ModalBuilder()
         .setCustomId(`application`)
         .setTitle(`RW Application`);
