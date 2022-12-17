@@ -1,5 +1,4 @@
 import { DiscordClient } from '../Utils/DiscordClient';
-import { MinecraftClient } from '../Utils/MinecraftClient';
 import {hash, makeid} from "../Utils/Hashing"
 import {writeChat, whisperChat} from "../Utils/IngameChat"
 import fs from 'fs';
@@ -7,19 +6,10 @@ export function handleIngameCommands(client: DiscordClient) {
     const { bot } = client;
     bot.on("player_chat", data =>{
         var message = String(data.plainMessage);
-        if (message.includes("?seed")){
-            writeChat(bot,"Test")
-        }
-        if (message.includes("?discord")){
-            writeChat(bot,"Invite: https://discord.gg/paCcuuP964")
-        }
         if (message.includes("?verify")){
             var username = JSON.parse(data.networkName).text
-            //console.log(JSON.parse(data.networkName).text)
-            //var code = hash(username).substring(0,10)
             var code = makeid(10)
             whisperChat(bot,"Your verification code is " + code + ". Use the /verify command in the discord to complete the verification.","Techfox")
-            //writeChat(bot,"Your verification code is " + code + ". Use the /verify command in the discord to complete the verification.")
             verification(username,code)
         }
     
