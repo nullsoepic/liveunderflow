@@ -3,6 +3,7 @@ import { DiscordClient } from '../Utils/DiscordClient';
 import { handleChat } from './Chat';
 import { PlayerManager } from './PlayerManager';
 import { ProfileCache } from './ProfileCache';
+import { handleIngameCommands } from './IngameCommands';
 
 export function handleMinecraft(client: DiscordClient) {
     if (!client.config['in-game-bot'].enabled) return; // Returns if there is no bot config
@@ -37,6 +38,7 @@ export function handleMinecraft(client: DiscordClient) {
     client.bot.on('connect', () => {
         console.log(`Connected to Server...`);
         handleChat(client);
+        handleIngameCommands(client);
     }); // Sends log message when the bot connects to the server
 }
 
