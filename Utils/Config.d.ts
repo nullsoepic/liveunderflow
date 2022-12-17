@@ -18,7 +18,6 @@ export type Config = {
         roles: {
             rwx: string,
             rw: string,
-            verified: string
         }
     },
     "in-game-bot": {

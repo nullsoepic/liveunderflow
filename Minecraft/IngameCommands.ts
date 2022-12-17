@@ -1,6 +1,6 @@
 import { DiscordClient } from '../Utils/DiscordClient';
-import {hash, makeid} from "../Utils/Hashing"
-import {writeChat, whisperChat} from "../Utils/IngameChat"
+import { makeid } from "../Utils/Hashing"
+import { whisperChat } from "../Utils/IngameChat"
 import fs from 'fs';
 export function handleIngameCommands(client: DiscordClient) {
     const { bot } = client;
@@ -20,12 +20,9 @@ export function handleIngameCommands(client: DiscordClient) {
 function verification(username:string,hash:string){
     let datajson = fs.readFileSync(__dirname + "/../Verification/pendingVerification.json","utf-8");
     let data = JSON.parse(datajson);  
-    //var j = {hash:username}
     data[hash] = username
-    //dataj.push(j)
     data = JSON.stringify(data)
     fs.writeFileSync(__dirname + "/../Verification/pendingVerification.json",data, { encoding: "utf-8" })
-    //fs.writeFileSync("/../Verification/pendingVerification.json",data, { encoding: "utf-8" })
 }
 
 

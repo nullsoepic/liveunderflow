@@ -26,13 +26,13 @@ export function execute(interaction: ChatInputCommandInteraction, client: Discor
             if (interaction.guild === null){
                 return
             }
-            let verifiedRole =interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.verified)
-            if (verifiedRole === undefined){
-                console.error("The verfied role doesnt exits or is not defined in the config")
-                return
-            }
-            const usr = interaction.guild?.members.cache.find(m => m.id === interaction.user.username);
-            usr?.roles.add(verifiedRole).catch(console.error)
+            // let verifiedRole =interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.verified)
+            // if (verifiedRole === undefined){
+            //     console.error("The verfied role doesnt exits or is not defined in the config")
+            //     return
+            // }
+            // const usr = interaction.guild?.members.cache.find(m => m.id === interaction.user.username);
+            // usr?.roles.add(verifiedRole).catch(console.error)
 
             //Ingame Verification Message
             const {bot} = client
