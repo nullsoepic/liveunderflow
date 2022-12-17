@@ -4,7 +4,6 @@ import { handleChat } from './Chat';
 import { PlayerManager } from './PlayerManager';
 import { ProfileCache } from './ProfileCache';
 import { handleIngameCommands } from './IngameCommands';
-import { registerTwitchAPI } from "../Twitch/TwitchAPI"
 
 export function handleMinecraft(client: DiscordClient) {
     if (!client.config['in-game-bot'].enabled) return; // Returns if there is no bot config
@@ -40,7 +39,6 @@ export function handleMinecraft(client: DiscordClient) {
         console.log(`Connected to Server...`);
         handleChat(client);
         handleIngameCommands(client);
-        //registerTwitchAPI(client);
     }); // Sends log message when the bot connects to the server
 }
 
