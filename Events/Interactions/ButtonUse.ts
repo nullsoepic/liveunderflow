@@ -46,6 +46,14 @@ export async function execute(interaction, client: DiscordClient) {
         }
 
         const usr = interaction.guild.members.cache.find(m => m.id === interaction.channel.topic);
+        
+        if (usr.roles.cache.find(r => r.id === client.config.guild.roles.rw)) {
+             return interaction.reply({
+                 content: `This person already has the RW role`,
+                 ephemeral: true
+             })
+        }
+        
         usr.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
         interaction.reply({
             content: `**🥳 Congrats <@${usr.user.id}>! You have been approved for the \`rw\` role!**`
