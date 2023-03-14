@@ -45,11 +45,17 @@ export async function execute(interaction, client: DiscordClient) {
             })
         }
 
-        const usr = interaction.guild.members.cache.find(m => m.id === interaction.channel.topic);
-        usr.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
-        interaction.reply({
-            content: `**🥳 Congrats <@${usr.user.id}>! You have been approved for the \`rw\` role!**`
-        })
+        try {
+            const usr = interaction.guild.members.cache.find(m => m.id === interaction.channel.topic);
+            usr.roles.add(interaction.guild.roles.cache.find(r => r.id === client.config.guild.roles.rw))
+            interaction.reply({
+                content: `**🥳 Congrats <@${usr.user.id}>! You have been approved for the \`rw\` role!**`
+            })
+        } catch(err) {
+            return interaction.reply({
+                content: `Failed to approve this user, try again`
+            })
+        }
         
         if(chan instanceof TextChannel) chan?.send({
             embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} approved: ${interaction.channel.name}**`)]
