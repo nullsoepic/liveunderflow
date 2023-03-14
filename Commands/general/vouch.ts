@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, GuildMemberRoleManager } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction, GuildMemberRoleManager, TextChannel } from 'discord.js';
 import { DiscordClient } from '../../Utils/DiscordClient';
 
 export const data = new SlashCommandBuilder()
@@ -25,8 +25,8 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
     const member: any = interaction.options.getMember(`user`);
 
     const { user } = member;
-    //@ts-ignore
-    if(member.id === interaction.member?.id) {
+    
+    if(member.id === interaction.user.id) {
         embed.setTitle(`You can't vouch for yourself!`);
         embed.setColor(`Red`);
         interaction.reply({
@@ -35,6 +35,12 @@ export async function execute(interaction: ChatInputCommandInteraction, client: 
         })
         return true;
     }
+
+    const channel = client.channels.cache.find((channel: any) => channel.topic === user.id) as TextChannel;
+    if(!channel) return interaction.reply({
+        content: "This user does not have a ticket.",
+        ephemeral: true
+    })
 
     member.roles.add(interaction.guild?.roles.cache.find(r => r.id === client.config.guild.roles.rw))
     embed.setTitle(`Thanks for vouching!`);
