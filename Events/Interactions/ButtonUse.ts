@@ -53,7 +53,8 @@ export async function execute(interaction, client: DiscordClient) {
             })
         } catch(err) {
             return interaction.reply({
-                content: `Failed to approve this user, try again`
+                content: `Failed to approve this user, try again`,
+                ephemeral: true
             })
         }
         
