@@ -44,6 +44,13 @@ export async function execute(interaction, client: DiscordClient) {
                 ephemeral: true
             })
         }
+        
+        if(interaction.channel.topic?.includes('Approved')) {
+            return interaction.reply({
+                content: `This application has already been approved!`,
+                ephemeral: true
+            })
+        }
 
         try {
             const usr = interaction.guild.members.cache.find(m => m.id === interaction.channel.topic);
@@ -57,6 +64,8 @@ export async function execute(interaction, client: DiscordClient) {
                 ephemeral: true
             })
         }
+        
+        interaction.channel.setTopic(`${interaction.channel.topic} - Approved`, `The user has been approved`)
         
         if(chan instanceof TextChannel) chan?.send({
             embeds: [new EmbedBuilder().setDescription(`**${interaction.member.user.tag} approved: ${interaction.channel.name}**`)]
